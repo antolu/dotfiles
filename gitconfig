@@ -1,0 +1,13 @@
+[url "https://aur.archlinux.org/"]
+	insteadOf = aur:
+[url "https://github.com/"]
+	insteadOf = "gh:"
+[url "git@github.com:"]
+	pushInsteadOf = "gh:"
+[url "git@gitlab.haochen.lu:"]
+	insteadOf = "gl:"
+[user]
+	email = anton96lu@gmail.com
+	name = Anton Lu
+[core]
+	autocrlf = input

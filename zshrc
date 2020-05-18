@@ -19,8 +19,40 @@ mkc () {
 	cd "$1"
 }
 
-brightness() {
+gitc () {
+  git clone "$1" "$2"
+
+  if [[ -z $2 ]]; then
+    cd "$2"
+  else
+    cd "$1"
+  fi
+}
+
+alias gitls='git status'
+
+brightness () {
 	echo ${$(( $1/100.*120000 ))%.*}  >! /sys/class/backlight/intel_backlight/brightness
+}
+
+alias wifi="nmcli d wifi"
+
+wifiscan () {
+  wifi list
+}
+
+wificonnect () {
+  if [[ -z "$2" ]]; then
+    wifi connect "$1"
+  else
+    wifi connect "$1" password "$2"
+  fi
+}
+
+watchfile() {
+while inotifywait -q -e modify "$1" >/dev/null; do
+    "$2"
+done
 }
 
 # >>> conda initialize >>>
@@ -39,6 +71,7 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 alias windows='sudo nextboot Microsoft && sudo reboot'
+alias please='sudo'
 
 sedrename() {
   if [ $# -gt 1 ]; then
