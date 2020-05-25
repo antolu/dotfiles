@@ -95,7 +95,7 @@ syncdir() {
   fi
 
   if [[ -z "$1" ]]; then
-    DIR="$HOME/code/"
+    DIR="$HOME/code"
     echo "Directory not supplied. Using default $DIR."
   else
     DIR="$1"
@@ -118,11 +118,14 @@ syncdir() {
     return
   fi
 
-  RSYNCFLAGS=" -azP --delete "
+  RSYNCFLAGS=" -azzP --delete "
 
   if [[ -f "$DIR/.syncignore" || N -eq "0" ]]; then
-    RSYNCFLAGS+=" --exclude-from=$DIR/.syncignore"
-    rsync "$RSYNCFLAGS" "$DIR" "$RDIR"
+    RSYNCFLAGS+=" --exclude-from=$DIR/.syncignore "
+    command="rsync $RSYNCFLAGS $DIR/ $RDIR"
+    eval $command
+    echo -e "\033[0;34m => Sync finished."
+    # echo "origin: $DIR | remote: $RDIR | flags: $RSYNCFLAGS"
     return
   else
     DEPTH=$(( N - 1 ))
