@@ -30,6 +30,7 @@ linkConfigs() {
 	ln -sf $SCRIPT_DIR/zshrc			~/.zshrc
 	ln -sf $SCRIPT_DIR/vimrc			~/.vimrc
 	ln -sf $SCRIPT_DIR/ideavimrc		~/.ideavimrc
+	ln -sf $SCRIPT_DIR/gitconfig		~/.gitconfig
 
 	mkdir -p ~/.config/i3				~/.config/i3blocks
 	ln -sf $SCRIPT_DIR/i3config 		~/.config/i3/config
