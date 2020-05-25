@@ -10,9 +10,32 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
+# ============================================================================
+# 
+# Enviromnent variables
+#
+# ============================================================================
 
+export EDITOR=/usr/bin/vim
+
+# ============================================================================
+# 
+# Aliases
+#
+# ============================================================================
+
+alias gitls='git status'
 alias pac='sudo pacman -Sy'
+alias please='sudo'
+alias svim='sudo vim'
+alias wifi="nmcli d wifi"
+alias windows='sudo nextboot Microsoft && sudo reboot'
+
+# ============================================================================
+# 
+# Functions 
+#
+# ============================================================================
 
 mkc () {
 	mkdir -p "$1"
@@ -29,13 +52,11 @@ gitc () {
   fi
 }
 
-alias gitls='git status'
 
 brightness () {
 	echo ${$(( $1/100.*120000 ))%.*}  >! /sys/class/backlight/intel_backlight/brightness
 }
 
-alias wifi="nmcli d wifi"
 
 wifiscan () {
   wifi list
@@ -55,6 +76,78 @@ while inotifywait -q -e modify "$1" >/dev/null; do
 done
 }
 
+sedrename() {
+  if [ $# -gt 1 ]; then
+    sed_pattern=$1
+    shift
+    for file in $(ls $@); do
+      mv -v "$file" "$(sed $sed_pattern <<< $file)"
+    done
+  else
+    echo "usage: $0 sed_pattern files..."
+  fi
+}
+
+syncdir() {
+  if [[ -z `command -v rsync` ]]; then
+    echo "rsync is not installed. Exiting."
+    return
+  fi
+
+  if [[ -z "$1" ]]; then
+    DIR="$HOME/code/"
+    echo "Directory not supplied. Using default $DIR."
+  else
+    DIR="$1"
+  fi
+
+  if [[ -z "$2" ]]; then 
+    RDIR="olympus:code"
+  else
+    RDIR="$2"
+  fi
+
+  if [[ -z "$3" ]]; then  # recursion depth
+    N=2
+  else
+    N="$3"
+  fi
+
+  if [[ ! -d "$DIR" ]]; then
+    echo "$DIR is not a directory. Exiting."
+    return
+  fi
+
+  RSYNCFLAGS=" -azP --delete "
+
+  if [[ -f "$DIR/.syncignore" || N -eq "0" ]]; then
+    RSYNCFLAGS+=" --exclude-from=$DIR/.syncignore"
+    rsync "$RSYNCFLAGS" "$DIR" "$RDIR"
+    return
+  else
+    DEPTH=$(( N - 1 ))
+    for dir in $DIR/*/; do
+      sleep 1
+      folder=${dir#"$DIR"}
+      remote="$RDIR/$folder"
+
+      # Add trailing slash
+      dir="$dir/"
+
+      # echo "origin: $dir | remote: $remote | N=$DEPTH"
+      syncdir $dir $remote $DEPTH
+    done
+    return
+  fi
+}
+
+
+# ============================================================================
+# 
+# Other
+#
+# ============================================================================
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/anton/.conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -70,17 +163,3 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-alias windows='sudo nextboot Microsoft && sudo reboot'
-alias please='sudo'
-
-sedrename() {
-  if [ $# -gt 1 ]; then
-    sed_pattern=$1
-    shift
-    for file in $(ls $@); do
-      mv -v "$file" "$(sed $sed_pattern <<< $file)"
-    done
-  else
-    echo "usage: $0 sed_pattern files..."
-  fi
-}
