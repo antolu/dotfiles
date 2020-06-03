@@ -91,7 +91,7 @@ sedrename() {
 syncdir() {
   if [[ -z `command -v rsync` ]]; then
     echo "rsync is not installed. Exiting."
-    return
+    return 1
   fi
 
   if [[ -z "$1" ]]; then
@@ -101,7 +101,11 @@ syncdir() {
     DIR="$1"
   fi
 
-  if [[ -z "$2" ]]; then 
+  if [[ -z "$2" ]]; then
+    if [[ ! -z "$1" ]]; then
+      echo "\033[-;31m => You have to supply a destination if using a custom origin."
+      return 2
+     fi
     RDIR="olympus:code"
   else
     RDIR="$2"

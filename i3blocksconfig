@@ -50,11 +50,11 @@ label=MEM
 separator=false
 interval=30
 
-[memory]
-label=SWAP
-instance=swap
-separator=false
-interval=30
+#[memory]
+#label=SWAP
+#instance=swap
+#separator=false
+#interval=30
 
 # Screen brightness
 #[script]
@@ -131,10 +131,10 @@ interval=5
 #
 # This displays "ARTIST - SONG" if a music is playing.
 # Supported players are: spotify, vlc, audacious, xmms2, mplayer, and others.
-#[mediaplayer]
-#instance=spotify
-#interval=5
-#signal=10
+[mediaplayer]
+instance=spotify
+interval=5
+signal=10
 
 # OpenVPN support
 #

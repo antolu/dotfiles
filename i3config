@@ -200,6 +200,9 @@ bar {
         status_command SCRIPT_DIR=/home/anton/.config/i3blocks  i3blocks
 }
 
+# exec --no-startup-id nitrogen --force-setter=xwindows --restore
+exec --no-startup-id ~/.fehbg
+
 #######################################################################
 # automatically start i3-config-wizard to offer the user to create a
 # keysym-based config which used their favorite modifier (alt or windows)
@@ -210,9 +213,8 @@ bar {
 #
 # Please remove the following exec line:
 #######################################################################
-exec i3-config-wizard
+# exec i3-config-wizard
 
 exec --no-startup-id wmctrl -c Plasma
 for_window [title="Desktop — Plasma"] kill; floating enable; border none
 
-exec --no-startup-id nitrogen --restore
