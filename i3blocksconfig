@@ -95,9 +95,9 @@ label=wifi:
 interval=10
 separator=false
 
-[bandwidth]
+#[bandwidth]
 #INTERFACE=eth0
-interval=5
+#interval=5
 
 # CPU usage
 #
@@ -119,6 +119,9 @@ interval=10
 [battery]
 label=BAT
 #label=⚡
+interval=30
+
+[batterybar]
 interval=30
 
 # Date Time

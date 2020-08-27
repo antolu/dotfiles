@@ -122,12 +122,13 @@ syncdir() {
     return
   fi
 
-  RSYNCFLAGS=" -azzP --delete "
+  RSYNCFLAGS=" -azzuP --delete "
 
   if [[ -f "$DIR/.syncignore" || N -eq "0" ]]; then
     RSYNCFLAGS+=" --exclude-from=$DIR/.syncignore "
     command="rsync $RSYNCFLAGS $DIR/ $RDIR"
-    eval $command
+    eval "rsync $RSYNCFLAGS $DIR/ $RDIR"
+    eval "rsync $RSYNCFLAGS $RDIR/ $DIR"
     echo -e "\033[0;34m => Sync finished."
     # echo "origin: $DIR | remote: $RDIR | flags: $RSYNCFLAGS"
     return
