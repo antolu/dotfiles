@@ -124,23 +124,13 @@ syncdir() {
     return
   fi
 
-<<<<<<< Updated upstream
-  RSYNCFLAGS=" -azzuP --delete "
-=======
   RSYNCFLAGS=" -azuzP --delete "
->>>>>>> Stashed changes
 
   if [[ -f "$DIR/.syncignore" || N -eq "0" ]]; then
     RSYNCFLAGS+=" --exclude-from=$DIR/.syncignore "
-    command="rsync $RSYNCFLAGS $DIR/ $RDIR"
-<<<<<<< Updated upstream
     eval "rsync $RSYNCFLAGS $DIR/ $RDIR"
     eval "rsync $RSYNCFLAGS $RDIR/ $DIR"
     echo -e "\033[0;34m => Sync finished."
-=======
-    eval $command
->>>>>>> Stashed changes
-    # echo "origin: $DIR | remote: $RDIR | flags: $RSYNCFLAGS"
     return
   else
     DEPTH=$(( N - 1 ))

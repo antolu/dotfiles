@@ -14,6 +14,26 @@ Plug 'scrooloose/syntastic'
 
 Plug 'dense-analysis/ale'
 
+Plug 'lervag/vimtex'
+
+Plug 'tpope/vim-fugitive'
+
+Plug 'tpope/vim-surround'
+
+Plug 'scrooloose/nerdcommenter'
+
+Plug 'vim-airline/vim-airline'
+
+Plug 'majutsushi/tagbar'
+
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'ctrlpvim/ctrlp.vim'
+
+Plug 'thaerkh/vim-workspace'
+
+autocmd VimEnter * if empty(glob("~/.config/coc/extensions/node_modules/coc-tabnine")) | execute 'CocInstall coc-tabnine' | endif
+
 call plug#end()
 
 " Don't try to be vi compatible
