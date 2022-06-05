@@ -32,6 +32,12 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'thaerkh/vim-workspace'
 
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+Plug 'ryanoasis/vim-devicons'
+
 autocmd VimEnter * if empty(glob("~/.config/coc/extensions/node_modules/coc-tabnine")) | execute 'CocInstall coc-tabnine' | endif
 
 call plug#end()
@@ -299,6 +305,11 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
+
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
 
 " syntastic
 set statusline+=%#warningmsg#
