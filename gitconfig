@@ -11,3 +11,4 @@
 	name = Anton Lu
 [core]
 	autocrlf = input
+	editor = vim
