@@ -9,7 +9,7 @@ call plug#begin('~/.vim')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'preservim/nerdtree'
-
+Plug 'jistr/vim-nerdtree-tabs'
 Plug 'scrooloose/syntastic'
 
 Plug 'dense-analysis/ale'
@@ -57,7 +57,7 @@ syntax on
 filetype plugin indent on
 
 " TODO: Pick a leader key
-" let mapleader = ","
+let mapleader =" " 
 
 " Security
 set modelines=0
@@ -79,16 +79,27 @@ set wrap
 set textwidth=0
 set formatoptions=tcqrn1
 set tabstop=2
-set shiftwidth=2
+set shiftwidth=4
 set softtabstop=2
 set expandtab
 set noshiftround
+set list                       " show trailing whitespace
+set listchars=tab:▸\ ,trail:▫
+
+set autoindent
+set autoread
 
 " Cursor motion
 set scrolloff=3
 set backspace=indent,eol,start
 set matchpairs+=<:> " use % to jump between pairs
 runtime! macros/matchit.vim
+
+" Enable basic mouse behavior such as resizing buffers.
+set mouse=a
+if exists('$TMUX')  " Support resizing in tmux
+  set ttymouse=xterm2
+endif
 
 " Move up/down editor lines
 nnoremap j gj
@@ -123,6 +134,14 @@ nnoremap <F1> :set invfullscreen<CR>
 vnoremap <F1> :set invfullscreen<CR>
 
 " Textmate holdouts
+
+" Resize shortcuts
+"let mapleader = ','
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+
 
 " Formatting
 map <leader>q gqip
@@ -310,6 +329,8 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
+nnoremap <leader>d :NERDTreeToggle<CR>
+nnoremap <leader>f :NERDTreeFind<CR>
 
 " syntastic
 set statusline+=%#warningmsg#
@@ -321,4 +342,21 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+" VimTex
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
 
+" CtrlP
+nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>t :CtrlP<CR>
+nnoremap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
+
+" Other
+nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
+noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+
+" in case you forgot to sudo
+cnoremap w!! %!sudo tee > /dev/null %
