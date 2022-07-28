@@ -4,7 +4,7 @@ Set of configuration files for Linux
 
 ## How to set up
 ```shell
-git clone https://gitlab.com/antolu/dotfiles.git ~/.dotfiles
+git clone https://gitlab.com/antonlu/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 zsh  # enter zsh
 source setup.sh
