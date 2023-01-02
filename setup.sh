@@ -1,8 +1,8 @@
 #!/bin/zsh
 
-if [[ "$SHELL" != "*/zsh" ]]; then
-    echo "This script should be sourced with zsh."
-    return
+if [[ "$0" != "-zsh" ]]; then
+	echo "This script should be sourced with zsh."
+	return
 fi
 
 CWD=$PWD
@@ -32,24 +32,27 @@ generateSSHKeychain() {
 
 linkConfigs() {
 	ln -sf $SCRIPT_DIR/zpreztorc		~/.zpreztorc
-	ln -sf $SCRIPT_DIR/zshrc			  ~/.zshrc
-	ln -sf $SCRIPT_DIR/vimrc			  ~/.vimrc
+	ln -sf $SCRIPT_DIR/zshrc			~/.zshrc
+	ln -sf $SCRIPT_DIR/vimrc			~/.vimrc
 	ln -sf $SCRIPT_DIR/ideavimrc		~/.ideavimrc
 	ln -sf $SCRIPT_DIR/gitconfig		~/.gitconfig
-  ln -sf $SCRIPT_DIR/p10k.zsh	    ~/.p10k.zsh
+	ln -sf $SCRIPT_DIR/p10k.zsh			~/.p10k.zsh
 
 	mkdir -p ~/.config/i3				~/.config/i3blocks
 	ln -sf $SCRIPT_DIR/i3config 		~/.config/i3/config
 	ln -sf $SCRIPT_DIR/i3blocksconfig	~/.config/i3blocks/config
+
+	mkdir -p ~/.vim
+	ln -sf $SCRIPT_DIR/.vim/configs 	~/.vim/configs
 }
 
 installFzfModule() {
-    mkdir -p $ZPREZTODIR/contrib && cd $_
-    git clone https://github.com/gpanders/fzf-prezto.git fzf
-    cd fzf
-    git submodule update --init
-    
-    cat <<EOF >> $SCRIPT_DIR/zpreztorc
+	mkdir -p $ZPREZTODIR/contrib && cd $_
+	git clone https://github.com/gpanders/fzf-prezto.git fzf
+	cd fzf
+	git submodule update --init
+	
+	cat <<EOF >> $SCRIPT_DIR/zpreztorc
 # Use keybindings
 zstyle ':prezto:module:fzf' key-bindings 'yes'
 
