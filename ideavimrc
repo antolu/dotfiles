@@ -1,4 +1,8 @@
 set sw=4
+ 
+Plug 'tpope/vim-surround'
+
+set easymotion
 
 " ---------------------------------------------
 " Regular Vim Configuration (No Plugins Needed)
@@ -156,7 +160,7 @@ command! Q q
 
 " Set leader to ,
 " Note: This line MUST come before any <leader> mappings
-let mapleader=','
+let mapleader=' '
 let maplocalleader = ' '
 
 " ---------------

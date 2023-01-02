@@ -3,44 +3,109 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+silent! let l:usefzf = system('command -v fzf')
+
+" Pick a leader key
+let mapleader =" " 
+let maplocalleader =" "
+
 call plug#begin('~/.vim')
 
-" Use release branch (recommend)
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" VimTex
+" {{{
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-Plug 'preservim/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'scrooloose/syntastic'
+    autocmd VimEnter * if empty(glob("~/.config/coc/extensions/node_modules/coc-tabnine")) | execute 'CocInstall coc-tabnine' | endif
+" }}}
 
-Plug 'dense-analysis/ale'
+" NerdTree
+" {{{
+    Plug 'preservim/nerdtree'
+    Plug 'jistr/vim-nerdtree-tabs'
+    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+    Plug 'Xuyuanp/nerdtree-git-plugin'
+" }}}
 
-Plug 'lervag/vimtex'
+" Syntax highlighting
+" {{{
+    Plug 'scrooloose/syntastic'
+    Plug 'dense-analysis/ale'
+" }}}
 
-Plug 'tpope/vim-fugitive'
+" VimTex
+" {{{
+    Plug 'lervag/vimtex'
 
-Plug 'tpope/vim-surround'
+    let g:tex_flavor = 'latex'
+    let g:vimtex_view_method = 'skim'
+    let g:vimtex_quickfix_mode=0
+    set conceallevel=1
+    let g:tex_conceal='abdmg'
+    nnoremap <localleader>lv :VimtexView<CR>
+" }}}
 
-Plug 'easymotion/vim-easymotion'
+" Markdown
+" {{{
+    Plug 'godlygeek/tabular'
+    Plug 'preservim/vim-markdown'
+    let g:vim_markdown_new_list_item_indent = 0
+" }}}
 
-Plug 'scrooloose/nerdcommenter'
+" Git
+" {{{
+    Plug 'tpope/vim-fugitive'
+" }}}
 
-Plug 'vim-airline/vim-airline'
+" Movement and quick edits
+" {{{
+    Plug 'tpope/vim-surround'
 
-Plug 'majutsushi/tagbar'
+    Plug 'easymotion/vim-easymotion'
 
-Plug 'vim-airline/vim-airline-themes'
+    Plug 'scrooloose/nerdcommenter'
+" }}}
 
-Plug 'ctrlpvim/ctrlp.vim'
+" Airline bar
+" {{{
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+" }}}
 
-Plug 'thaerkh/vim-workspace'
+" Tagbar
+"{{{
+    Plug 'majutsushi/tagbar'
+    nmap <leader>tb :TagbarToggle<CR>
+" }}}
 
-Plug 'Xuyuanp/nerdtree-git-plugin'
 
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" Fuzzy file search
+" {{{
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
+    Plug 'ctrlpvim/ctrlp.vim'
+" }}}
 
-Plug 'ryanoasis/vim-devicons'
+" Workspace
+" {{{
+    Plug 'thaerkh/vim-workspace'
+    " let g:workspace_autocreate = 1
+    let g:workspace_session_directory = $HOME . '/.vim/sessions/'
+    
+    nmap <leader>tw :ToggleWorkspace<CR>
+" }}}
 
-autocmd VimEnter * if empty(glob("~/.config/coc/extensions/node_modules/coc-tabnine")) | execute 'CocInstall coc-tabnine' | endif
+" UI Plugins
+" {{{
+    Plug 'ryanoasis/vim-devicons'
+" }}}
+
+
+" Python
+" {{{
+    Plug 'python-rope/ropevim'
+" }}}
+
+Plug 'preservim/vim-lexical'
 
 call plug#end()
 
@@ -57,10 +122,6 @@ syntax on
 
 " For plugins to load correctly
 filetype plugin indent on
-
-" TODO: Pick a leader key
-let mapleader =" " 
-let maplocalleader =" "
 
 " Security
 set modelines=0
@@ -328,15 +389,26 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && v:this_session == "" | NERDTree | endif
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
+" {{{
+  let g:NERDTreeMinimalUI = 1
+  let g:NERDTreeHijackNetrw = 0
+  let g:NERDTreeWinSize = 31
+  let g:NERDTreeChDirMode = 2
+  let g:NERDTreeAutoDeleteBuffer = 1
+  let g:NERDTreeShowBookmarks = 1
+  let g:NERDTreeCascadeOpenSingleChildDir = 1
 
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
-nnoremap <leader>d :NERDTreeToggle<CR>
-nnoremap <leader>f :NERDTreeFind<CR>
+  map <F1> :call NERDTreeToggleAndFind()<cr>
+  map <F2> :NERDTreeToggle<CR>
+
+  function! NERDTreeToggleAndFind()
+    if (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
+      execute ':NERDTreeClose'
+    else
+      execute ':NERDTreeFind'
+    endif
+  endfunction
+" }}}
 
 " syntastic
 set statusline+=%#warningmsg#
@@ -348,21 +420,91 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-" VimTex
-let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
-let g:vimtex_quickfix_mode=0
-set conceallevel=1
-let g:tex_conceal='abdmg'
+" fzf.vim
+" {{{
+  let g:fzf_nvim_statusline = 0 " disable statusline overwriting
 
-" CtrlP
-nnoremap <leader>b :CtrlPBuffer<CR>
-nnoremap <leader>t :CtrlP<CR>
-nnoremap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
+  nnoremap <silent> <leader>f :Files<CR>
+  nnoremap <silent> <leader>a :Buffers<CR>
+  nnoremap <silent> <leader>A :Windows<CR>
+  nnoremap <silent> <leader>; :BLines<CR>
+  nnoremap <silent> <leader>o :BTags<CR>
+  nnoremap <silent> <leader>O :Tags<CR>
+  nnoremap <silent> <leader>? :History<CR>
+  nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
+  nnoremap <silent> <leader>. :AgIn
+
+  nnoremap <silent> K :call SearchWordWithAg()<CR>
+  vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
+  nnoremap <silent> <leader>gl :Commits<CR>
+  nnoremap <silent> <leader>ga :BCommits<CR>
+  nnoremap <silent> <leader>ft :Filetypes<CR>
+
+  imap <C-x><C-f> <plug>(fzf-complete-file-ag)
+  imap <C-x><C-l> <plug>(fzf-complete-line)
+
+  function! SearchWordWithAg()
+    execute 'Ag' expand('<cword>')
+  endfunction
+
+  function! SearchVisualSelectionWithAg() range
+    let old_reg = getreg('"')
+    let old_regtype = getregtype('"')
+    let old_clipboard = &clipboard
+    set clipboard&
+    normal! ""gvy
+    let selection = getreg('"')
+    call setreg('"', old_reg, old_regtype)
+    let &clipboard = old_clipboard
+    execute 'Ag' selection
+  endfunction
+
+  function! SearchWithAgInDirectory(...)
+    call fzf#vim#ag(join(a:000[1:], ' '), extend({'dir': a:1}, g:fzf#vim#default_layout))
+  endfunction
+  command! -nargs=+ -complete=dir AgIn call SearchWithAgInDirectory(<f-args>)
+" }}}
+
+
+" ctrlp.vim
+" {{{
+    let g:ctrlp_map = '<c-p>'
+
+    let g:ctrlp_custom_ignore = {
+      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+      \ 'file': '\v\.(exe|so|dll)$',
+      \ 'link': 'some_bad_symbolic_links',
+      \ }
+
+    let g:ctrlp_user_command = 'find %s -type f'
+    set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+" }}}
+
+" lexical
+" {{{
+augroup lexical
+  autocmd!
+  autocmd FileType markdown,mkd call lexical#init()
+  autocmd FileType textile call lexical#init()
+  autocmd FileType text call lexical#init({ 'spell': 0 })
+augroup END
+
+let g:lexical#spell = 1         " 0=disabled, 1=enabled
+" }}}
 
 " Other
-nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
+nnoremap <leader>st :call whitespace#strip_trailing()<CR>
 noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " in case you forgot to sudo
 cnoremap w!! %!sudo tee > /dev/null %
+
+" copy
+vnoremap <C-c> :w !pbcopy<CR><CR>
+noremap <C-v> :r !pbpaste<CR><CR>
+
+" For local replace
+nnoremap <leader>r gd[{V%::s/<C-R>///gc<left><left><left>
+
+" For global replace
+nnoremap <leader>R gD:%s/<C-R>///gc<left><left><left>

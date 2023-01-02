@@ -38,3 +38,33 @@ linkConfigs() {
 	ln -sf $SCRIPT_DIR/i3blocksconfig	~/.config/i3blocks/config
 }
 
+installFzfModule() {
+    mkdir -p $ZPREZTODIR/contrib && cd $_
+    git clone https://github.com/gpanders/fzf-prezto.git fzf
+    cd fzf
+    git submodule update --init
+    
+    cat <<EOF >> $SCRIPT_DIR/zpreztorc
+# Use keybindings
+zstyle ':prezto:module:fzf' key-bindings 'yes'
+
+# Use completion
+zstyle ':prezto:module:fzf' completion 'yes'
+
+# Set height of the fzf results (comment for full screen)
+zstyle ':prezto:module:fzf' height '30%'
+
+# Open fzf results in a tmux pane (if using tmux)
+zstyle ':prezto:module:fzf' tmux 'yes'
+
+# Set colorscheme
+# A list of available colorschemes is available in color.zsh
+# To add more color schemes of your own, consult
+# https://github.com/junegunn/fzf/wiki/Color-schemes and add values to the
+# color.zsh file accordingly
+zstyle ':prezto:module:fzf' colorscheme 'Solarized Light'
+EOF
+
+cd $CWD
+}
+

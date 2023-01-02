@@ -86,6 +86,14 @@ while inotifywait -q -e modify "$1" >/dev/null; do
 done
 }
 
+mkv2mp4() {
+    ffmpeg -i "$1" -map 0 -codec copy -c:s mov_text -tag:v hvc1 "$2"
+}
+
+clip() {
+    xclip -selection C "$1"
+}
+
 sedrename() {
   if [ $# -gt 1 ]; then
     sed_pattern=$1
@@ -183,3 +191,5 @@ unset __conda_setup
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
