@@ -1,9 +1,14 @@
-#!/bin/bash
+#!/bin/zsh
+
+if [[ "$SHELL" != "*/zsh" ]]; then
+    echo "This script should be sourced with zsh."
+    return
+fi
 
 CWD=$PWD
 SCRIPT_DIR="$( cd "$( dirname "$0" )" >/dev/null 2>&1 && pwd )"
 
-installZsh() {
+setupZsh() {
 	if [[ ! -d ~/.zprezto ]]; then
 		echo "=> Installing zprezto"
 		git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto" > /dev/null
