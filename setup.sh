@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-if [[ "$0" != "-zsh" ]]; then
+if [[ "$ZSH_NAME" != "zsh" ]]; then
 	echo "This script should be sourced with zsh."
 	return
 fi
