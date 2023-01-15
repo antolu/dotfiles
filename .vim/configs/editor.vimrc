@@ -17,11 +17,14 @@
 " Movement and quick edits
 " {{{
     Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-unimpaired'
     Plug 'easymotion/vim-easymotion'
     Plug 'scrooloose/nerdcommenter'
     Plug 'tpope/vim-commentary'
 
     Plug 'ludovicchabant/vim-gutentags'
+    
+    let g:gutentags_ctags_tagfile = '.tags'
 " }}}
 
 " Markdown
@@ -48,13 +51,26 @@
 
 " Python
 " {{{
-    Plug 'KangOl/vim-pudb'
-    nnoremap <F8> :TogglePudbBreakPoint<CR>
-    inoremap <F8> <ESC>:TogglePudbBreakPoint<CR>
+    Plug 'puremourning/vimspector'
+    nnoremap <F5> :call vimspector#Launch()<CR>
+    nnoremap <Leader>de :call vimspector#Reset()<CR>
+    nnoremap <Leader>dc :call vimspector#Continue()<CR>
+
+    nnoremap <Leader>dt :call vimspector#ToggleBreakpoint()<CR>
+    nnoremap <Leader>dT :call vimspector#ClearBreakpoints()<CR>
+
+    nmap <Leader>dr <Plug>VimspectorRestart
+    nmap <F9> <Plug>VimspectorStepOut
+    nmap <F7> <Plug>VimspectorStepInto
+    nmap <F8> <Plug>VimspectorStepOver
+
+    let g:vimspector_enable_mappings = 'HUMAN'
 
     Plug 'kana/vim-textobj-user'
     Plug 'bps/vim-textobj-python'
     Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+
+    let g:pymode_lint_cwindow=0
 " }}}
 
 " Whitespace
