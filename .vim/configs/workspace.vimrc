@@ -111,3 +111,7 @@ set smartcase
 set showmatch
 map <leader>cs :let @/=''<cr> " clear search
 
+" WakaTime
+" {{{
+    Plug 'wakatime/vim-wakatime'
+" }}}
