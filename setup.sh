@@ -46,6 +46,9 @@ linkConfigs() {
 	for file in $SCRIPT_DIR/vim/configs/*; do
 		ln -sf $file			~/.vim/configs/$(basename $file)
 	done
+
+    mkdir -p ~/.config/nvim
+    ln -sf $SCRIPT_DIR/nvim/init.vim ~/.config/nvim/init.vim
 }
 
 installFzfModule() {
