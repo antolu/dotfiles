@@ -24,7 +24,7 @@ setupZsh() {
 generateSSHKeychain() {
 	if [[ ! -f ~/.ssh/id_ed25519 ]]; then
 		echo "=> Generating ssh-keys"
-		ssh-keygen -t ed25519 -C "$USER@$HOSTNAME" -N ''
+		ssh-keygen -t ed25519 -C "$USER@`cat /proc/sys/kernel/hostname`" -N ''
 		eval $(ssh-agent -s)
 		ssh-add ~/.ssh/id_ed25519
 	fi

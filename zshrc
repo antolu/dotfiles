@@ -42,6 +42,11 @@ alias cernproxy='ssh -N -D 9090 lxplus'
 alias cernvmproxy='ssh -L 5901:localhost:5901 cernvm2'
 alias ibrew="arch -x86_64 /usr/local/bin/brew"
 
+alias srestart='sudo systemctl restart'
+alias sstatus='sudo systemctl status'
+alias sstart='sudo systemctl start'
+alias sstop='sudo systemctl stop'
+
 # ============================================================================
 # 
 # Functions 

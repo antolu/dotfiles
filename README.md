@@ -9,7 +9,14 @@ cd ~/.dotfiles
 zsh  # enter zsh
 source setup.sh
 installZsh
-linkConfigs
+installFzfModule
+linkConfigs  # note this will overwrite your current .zshrc, .zprofile, .vimrc etc.
 chsh -s /bin/zsh  # set default shell to zsh
+```
+
+Other useful functions are
+
+```
+generateSSHKeychain  # generates an ed25519 keychain with your username and hostname as comment
 ```
 
