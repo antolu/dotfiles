@@ -7,7 +7,7 @@
 " {{{
     Plug 'preservim/nerdtree'
     Plug 'jistr/vim-nerdtree-tabs'
-    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+    " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
     Plug 'Xuyuanp/nerdtree-git-plugin'
     autocmd StdinReadPre * let s:std_in=1
     autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && v:this_session == "" | NERDTree | endif

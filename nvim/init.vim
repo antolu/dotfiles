@@ -1,5 +1,6 @@
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath = &runtimepath
 source ~/.vimrc
-
 
 " Tags
 " {{{
@@ -246,3 +247,5 @@ source ~/.vimrc
     endfunction
     command! -nargs=+ -complete=dir AgIn call SearchWithAgInDirectory(<f-args>)
 " }}}
+
+call plug#end()
