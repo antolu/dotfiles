@@ -1,3 +1,10 @@
+" Text objects
+" {
+    Plug 'vim-scripts/argtextobj.vim'
+    Plug 'michaeljsmith/vim-indent-object'
+"}
+
+
 " Syntax highlighting
 " {{{
     Plug 'scrooloose/syntastic'
@@ -14,17 +21,41 @@
     Plug 'dense-analysis/ale'
 " }}}
 
+" Easymotion
+" {
+    Plug 'easymotion/vim-easymotion'
+
+    nnoremap <leader><leader>w <Plug>(easymotion-bd-w)
+    nnoremap <leader><leader>t <Plug>(easymotion-bd-t)
+    nnoremap <leader><leader>f <Plug>(easymotion-bd-f)
+    nnoremap <leader><leader>F <Plug>(easymotion-overwin-f)
+    nnoremap <leader><leader>e <Plug>(easymotion-bd-e)
+    nnoremap <leader><leader>L <Plug>(easymotion-overwin-line)
+    nnoremap <leader><leader>W <Plug>(easymotion-overwin-w)
+    nnoremap <leader><leader>s <Plug>(easymotion-s2)
+    nnoremap <leader><leader>S <Plug>(easymotion-overwin-f2)
+
+    nnoremap <leader><leader>r <Plug>(easymotion-repeat)
+    nnoremap <leader><leader>n <Plug>(easymotion-next)
+    nnoremap <leader><leader>p <Plug>(easymotion-prev)
+
+" }
+
 " Movement and quick edits
 " {{{
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-unimpaired'
-    Plug 'easymotion/vim-easymotion'
+    Plug 'tpope/vim-repeat'
     Plug 'scrooloose/nerdcommenter'
     Plug 'tpope/vim-commentary'
 
     Plug 'ludovicchabant/vim-gutentags'
+    Plug 'skywind3000/gutentags_plus'
     
     let g:gutentags_ctags_tagfile = '.tags'
+    let g:gutentags_modules = ['ctags', 'gtags_cscope']
+    let g:gutentags_project_root = ['.use_tags']
+    let g:gutentags_cache_dir = expand('~/.cache/tags')
 " }}}
 
 " Markdown
