@@ -1,6 +1,3 @@
-
-silent! let l:usefzf = system('command -v fzf')
-
 " Pick a leader key
 let mapleader =" " 
 let maplocalleader =" "
