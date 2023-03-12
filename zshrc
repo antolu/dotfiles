@@ -39,7 +39,7 @@ alias svim='sudo vim'
 alias wifi="nmcli d wifi"
 alias windows='sudo nextboot Microsoft && sudo reboot'
 alias cernproxy='ssh -N -D 9090 lxplus'
-alias cernvmproxy='ssh -L 5901:localhost:5901 cernvm'
+alias cernvmproxy='ssh -L 5901:localhost:5901 cernvm2'
 alias ibrew="arch -x86_64 /usr/local/bin/brew"
 
 # ============================================================================
