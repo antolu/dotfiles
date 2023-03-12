@@ -32,18 +32,20 @@ generateSSHKeychain() {
 
 linkConfigs() {
 	ln -sf $SCRIPT_DIR/zpreztorc		~/.zpreztorc
-	ln -sf $SCRIPT_DIR/zshrc			~/.zshrc
-	ln -sf $SCRIPT_DIR/vimrc			~/.vimrc
+	ln -sf $SCRIPT_DIR/zshrc		~/.zshrc
+	ln -sf $SCRIPT_DIR/vim/vimrc		~/.vimrc
 	ln -sf $SCRIPT_DIR/ideavimrc		~/.ideavimrc
 	ln -sf $SCRIPT_DIR/gitconfig		~/.gitconfig
-	ln -sf $SCRIPT_DIR/p10k.zsh			~/.p10k.zsh
+	ln -sf $SCRIPT_DIR/p10k.zsh		~/.p10k.zsh
 
-	mkdir -p ~/.config/i3				~/.config/i3blocks
+	mkdir -p ~/.config/i3			~/.config/i3blocks
 	ln -sf $SCRIPT_DIR/i3config 		~/.config/i3/config
 	ln -sf $SCRIPT_DIR/i3blocksconfig	~/.config/i3blocks/config
 
-	mkdir -p ~/.vim
-	ln -sf $SCRIPT_DIR/.vim/configs 	~/.vim/configs
+	mkdir -p ~/.vim/configs
+	for file in $SCRIPT_DIR/vim/configs/*; do
+		ln -sf $file			~/.vim/configs/$(basename $file)
+	done
 }
 
 installFzfModule() {
