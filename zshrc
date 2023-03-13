@@ -182,14 +182,14 @@ syncdir() {
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/anton/.conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/antonlu/.conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/anton/.conda/etc/profile.d/conda.sh" ]; then
-        . "/home/anton/.conda/etc/profile.d/conda.sh"
+    if [ -f "/Users/antonlu/.conda/etc/profile.d/conda.sh" ]; then
+        . "/Users/antonlu/.conda/etc/profile.d/conda.sh"
     else
-        export PATH="/home/anton/.conda/bin:$PATH"
+        export PATH="/Users/antonlu/.conda/bin:$PATH"
     fi
 fi
 unset __conda_setup
