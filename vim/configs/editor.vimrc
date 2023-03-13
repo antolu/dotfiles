@@ -24,6 +24,7 @@
     Plug 'dense-analysis/ale'
 " }}}
 
+if !has('nvim')
 " Easymotion
 " {
     Plug 'easymotion/vim-easymotion'
@@ -41,14 +42,15 @@
     nnoremap <leader><leader>r <Plug>(easymotion-repeat)
     nnoremap <leader><leader>n <Plug>(easymotion-next)
     nnoremap <leader><leader>p <Plug>(easymotion-prev)
-
 " }
+endif
 
 " Movement and quick edits
 " {{{
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-unimpaired'
     Plug 'tpope/vim-repeat'
+    Plug 'matze/vim-move'
     Plug 'scrooloose/nerdcommenter'
     Plug 'tpope/vim-commentary'
 " }}}

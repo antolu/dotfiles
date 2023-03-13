@@ -1,8 +1,10 @@
+if !has('nvim')
 " Airline bar
 " {{{
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
 " }}}
+endif
 
 " Tagbar
 "{{{

@@ -47,6 +47,9 @@ alias sstatus='sudo systemctl status'
 alias sstart='sudo systemctl start'
 alias sstop='sudo systemctl stop'
 
+alias source-accpy='source /acc/local/share/python/acc-py/pro/setup.sh'
+alias socks-proxy='ssh -L 9090:localhost:9090 lxplus'
+
 # ============================================================================
 # 
 # Functions 
