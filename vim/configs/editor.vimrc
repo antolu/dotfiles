@@ -2,6 +2,9 @@
 " {
     Plug 'vim-scripts/argtextobj.vim'
     Plug 'michaeljsmith/vim-indent-object'
+
+    Plug 'kana/vim-textobj-user'
+    Plug 'bps/vim-textobj-python'
 "}
 
 
@@ -48,14 +51,6 @@
     Plug 'tpope/vim-repeat'
     Plug 'scrooloose/nerdcommenter'
     Plug 'tpope/vim-commentary'
-
-    Plug 'ludovicchabant/vim-gutentags'
-    Plug 'skywind3000/gutentags_plus'
-    
-    let g:gutentags_ctags_tagfile = '.tags'
-    let g:gutentags_modules = ['ctags', 'gtags_cscope']
-    let g:gutentags_project_root = ['.use_tags']
-    let g:gutentags_cache_dir = expand('~/.cache/tags')
 " }}}
 
 " Markdown
@@ -80,29 +75,6 @@
     let g:lexical#spell = 1         " 0=disabled, 1=enabled
 " }}}
 
-" Python
-" {{{
-    Plug 'puremourning/vimspector'
-    nnoremap <F5> :call vimspector#Launch()<CR>
-    nnoremap <Leader>de :call vimspector#Reset()<CR>
-    nnoremap <Leader>dc :call vimspector#Continue()<CR>
-
-    nnoremap <Leader>dt :call vimspector#ToggleBreakpoint()<CR>
-    nnoremap <Leader>dT :call vimspector#ClearBreakpoints()<CR>
-
-    nmap <Leader>dr <Plug>VimspectorRestart
-    nmap <F9> <Plug>VimspectorStepOut
-    nmap <F7> <Plug>VimspectorStepInto
-    nmap <F8> <Plug>VimspectorStepOver
-
-    let g:vimspector_enable_mappings = 'HUMAN'
-
-    Plug 'kana/vim-textobj-user'
-    Plug 'bps/vim-textobj-python'
-    Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-
-    let g:pymode_lint_cwindow=0
-" }}}
 
 " Whitespace
 set wrap
@@ -130,7 +102,7 @@ runtime! macros/matchit.vim
 
 " Enable basic mouse behavior such as resizing buffers.
 set mouse=a
-if exists('$TMUX')  " Support resizing in tmux
+if exists('$TMUX') && has('vim')  " Support resizing in tmux
   set ttymouse=xterm2
 endif
 

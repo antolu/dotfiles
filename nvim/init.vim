@@ -1,16 +1,42 @@
-" Autocomplete
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath = &runtimepath
+source ~/.vimrc
+
+" Tags
 " {{{
-    Plug 'github/copilot.vim'
+    Plug 'ludovicchabant/vim-gutentags'
+    Plug 'skywind3000/gutentags_plus'
+    
+    let g:gutentags_ctags_tagfile = '.tags'
+    let g:gutentags_modules = ['ctags', 'gtags_cscope']
+    let g:gutentags_project_root = ['.use_tags']
+    let g:gutentags_cache_dir = expand('~/.cache/tags')
+" }}}
 
-    imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
-    imap <silent> <C-\> <Plug>(copilot-suggest)
-    imap <silent> <C-'> <Plug>(copilot-dismiss)
-    imap <silent> <C-]> <Plug>(copilot-next)
-    imap <silent> <C-]> <Plug>(copilot-previous)
+" Python
+" {{{
+    Plug 'puremourning/vimspector'
+    nnoremap <F5> :call vimspector#Launch()<CR>
+    nnoremap <Leader>de :call vimspector#Reset()<CR>
+    nnoremap <Leader>dc :call vimspector#Continue()<CR>
 
-    let g:copilot_no_tab_map = v:true
+    nnoremap <Leader>dt :call vimspector#ToggleBreakpoint()<CR>
+    nnoremap <Leader>dT :call vimspector#ClearBreakpoints()<CR>
 
-    " =================================================
+    nmap <Leader>dr <Plug>VimspectorRestart
+    nmap <F9> <Plug>VimspectorStepOut
+    nmap <F7> <Plug>VimspectorStepInto
+    nmap <F8> <Plug>VimspectorStepOver
+
+    let g:vimspector_enable_mappings = 'HUMAN'
+
+    Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+
+    let g:pymode_lint_cwindow=0
+" }}}
+
+" coc.nvim
+" {{{
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     autocmd VimEnter * if empty(glob("~/.config/coc/extensions/node_modules/coc-pyright")) | execute 'CocInstall coc-pyright' | endif
@@ -173,3 +199,53 @@
     nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " }}}
 
+" fzf
+" {{{
+
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
+
+    let g:fzf_nvim_statusline = 0 " disable statusline overwriting
+
+    nnoremap <silent> <leader>f :Files<CR>
+    nnoremap <silent> <leader>a :Buffers<CR>
+    nnoremap <silent> <leader>A :Windows<CR>
+    nnoremap <silent> <leader>; :BLines<CR>
+    nnoremap <silent> <leader>o :BTags<CR>
+    nnoremap <silent> <leader>O :Tags<CR>
+    nnoremap <silent> <leader>? :History<CR>
+    nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
+    nnoremap <silent> <leader>. :AgIn
+
+    nnoremap <silent> K :call SearchWordWithAg()<CR>
+    vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
+    nnoremap <silent> <leader>gl :Commits<CR>
+    nnoremap <silent> <leader>ga :BCommits<CR>
+    nnoremap <silent> <leader>ft :Filetypes<CR>
+
+    imap <C-x><C-f> <plug>(fzf-complete-file-ag)
+    imap <C-x><C-l> <plug>(fzf-complete-line)
+
+    function! SearchWordWithAg()
+        execute 'Ag' expand('<cword>')
+    endfunction
+
+    function! SearchVisualSelectionWithAg() range
+        let old_reg = getreg('"')
+        let old_regtype = getregtype('"')
+        let old_clipboard = &clipboard
+        set clipboard&
+        normal! ""gvy
+        let selection = getreg('"')
+        call setreg('"', old_reg, old_regtype)
+        let &clipboard = old_clipboard
+        execute 'Ag' selection
+    endfunction
+
+    function! SearchWithAgInDirectory(...)
+    call fzf#vim#ag(join(a:000[1:], ' '), extend({'dir': a:1}, g:fzf#vim#default_layout))
+    endfunction
+    command! -nargs=+ -complete=dir AgIn call SearchWithAgInDirectory(<f-args>)
+" }}}
+
+call plug#end()
