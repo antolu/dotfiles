@@ -51,7 +51,7 @@
       \ 'link': 'some_bad_symbolic_links',
       \ }
 
-    let g:ctrlp_user_command = 'find %s -type f'
+    " let g:ctrlp_user_command = 'find %s -type f'
     set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 " }}}
 
