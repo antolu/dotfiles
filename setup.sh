@@ -49,6 +49,7 @@ linkConfigs() {
 
     mkdir -p ~/.config/nvim
     ln -sf $SCRIPT_DIR/nvim/init.vim ~/.config/nvim/init.vim
+    ln -sf $SCRIPT_DIR/nvim/coc-settings.json ~/.config/nvim/coc-settings.json
 }
 
 installFzfModule() {

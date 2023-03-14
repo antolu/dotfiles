@@ -257,7 +257,7 @@ source ~/.vimrc
 " telescope.nvim
 " {{{
     Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim', { 'branch': 'release' }
+    Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
 
     nunmap <leader>f
     nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
@@ -277,8 +277,6 @@ source ~/.vimrc
 " }}}
 
 call plug#end()
-
-
 
 lua<<EOF
 require("gitsigns").setup {
@@ -325,4 +323,8 @@ yadm = {
 }
 EOF
 lua require('leap').add_default_mappings()
+lua require('telescope').setup()
+lua require('lualine.themes.powerline_dark')
+lua require('lualine').setup({options = { theme = 'powerline_dark' } })
+
 
