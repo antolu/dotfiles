@@ -36,6 +36,7 @@ zstyle ':prezto:load' pmodule \
   'fzf' \
   'spectrum' \
   'utility' \
+  'python' \
   'completion' \
   'syntax-highlighting' \
   'autosuggestions' \
