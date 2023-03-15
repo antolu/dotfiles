@@ -2,6 +2,9 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/.vimrc
 
+nnoremap <leader>ne :lnext<CR>
+nnoremap <leader>pe :lprevious<CR>
+
 " Tags
 " {{{
     Plug 'ludovicchabant/vim-gutentags'
@@ -107,6 +110,7 @@ source ~/.vimrc
 
     " GoTo code navigation.
     nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> ge <Plug>(coc-declaration)
     nmap <silent> gy <Plug>(coc-type-definition)
     nmap <silent> gi <Plug>(coc-implementation)
     nmap <silent> gr <Plug>(coc-references)
@@ -129,8 +133,8 @@ source ~/.vimrc
     nmap <leader>rn <Plug>(coc-rename)
 
     " Formatting selected code.
-    xmap <leader>f  <Plug>(coc-format-selected)
-    nmap <leader>f  <Plug>(coc-format-selected)
+    xmap <leader>F  <Plug>(coc-format-selected)
+    nmap <leader>F  <Plug>(coc-format-selected)
 
     augroup mygroup
       autocmd!
@@ -207,45 +211,10 @@ source ~/.vimrc
 
     let g:fzf_nvim_statusline = 0 " disable statusline overwriting
 
-    nnoremap <silent> <leader>f :Files<CR>
-    nnoremap <silent> <leader>a :Buffers<CR>
-    nnoremap <silent> <leader>A :Windows<CR>
-    nnoremap <silent> <leader>; :BLines<CR>
     nnoremap <silent> <leader>o :BTags<CR>
+    nnoremap <silent> <leader>ft :BTags<CR>
     nnoremap <silent> <leader>O :Tags<CR>
-    nnoremap <silent> <leader>? :History<CR>
-    nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
-    nnoremap <silent> <leader>. :AgIn
-
-    nnoremap <silent> K :call SearchWordWithAg()<CR>
-    vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
-    nnoremap <silent> <leader>gl :Commits<CR>
-    nnoremap <silent> <leader>ga :BCommits<CR>
-    nnoremap <silent> <leader>ft :Filetypes<CR>
-
-    imap <C-x><C-f> <plug>(fzf-complete-file-ag)
-    imap <C-x><C-l> <plug>(fzf-complete-line)
-
-    function! SearchWordWithAg()
-        execute 'Ag' expand('<cword>')
-    endfunction
-
-    function! SearchVisualSelectionWithAg() range
-        let old_reg = getreg('"')
-        let old_regtype = getregtype('"')
-        let old_clipboard = &clipboard
-        set clipboard&
-        normal! ""gvy
-        let selection = getreg('"')
-        call setreg('"', old_reg, old_regtype)
-        let &clipboard = old_clipboard
-        execute 'Ag' selection
-    endfunction
-
-    function! SearchWithAgInDirectory(...)
-    call fzf#vim#ag(join(a:000[1:], ' '), extend({'dir': a:1}, g:fzf#vim#default_layout))
-    endfunction
-    command! -nargs=+ -complete=dir AgIn call SearchWithAgInDirectory(<f-args>)
+    " nnoremap <silent> <leader>fh :Helptags<CR>
 " }}}
 
 " lualine
@@ -259,11 +228,11 @@ source ~/.vimrc
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
 
-    nunmap <leader>f
     nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
     nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
     nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
     nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+    nnoremap <leader>ft <cmd>lua require('telescope.builtin').tags()<cr>
 " }}}
 
 " gitsigns.nvim
@@ -276,7 +245,20 @@ source ~/.vimrc
     Plug 'ggandor/leap.nvim'
 " }}}
 
+" hop.nvim
+" {{{
+    Plug 'phaazon/hop.nvim'
+" }}}_
+
+" theme
+" {{{
+    Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+    Plug 'sonph/onehalf', {'rtp': 'vim/'}
+" }}}
+
 call plug#end()
+
+colorscheme onehalflight
 
 lua<<EOF
 require("gitsigns").setup {
@@ -326,5 +308,23 @@ lua require('leap').add_default_mappings()
 lua require('telescope').setup()
 lua require('lualine.themes.powerline_dark')
 lua require('lualine').setup({options = { theme = 'powerline_dark' } })
+
+lua <<EOF
+hop = require('hop')
+hop.setup()
+directions = require('hop.hint').HintDirection
+vim.keymap.set('', 'f', function()
+  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true })
+end, {remap=true})
+vim.keymap.set('', 'F', function()
+  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true })
+end, {remap=true})
+vim.keymap.set('', 't', function()
+  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })
+end, {remap=true})
+vim.keymap.set('', 'T', function()
+  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
+end, {remap=true})
+EOF
 
 

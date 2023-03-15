@@ -44,9 +44,11 @@
     Plug 'ctrlpvim/ctrlp.vim'
 
     let g:ctrlp_map = '<c-p>'
+    nnoremap <leader>pb :CtrlPBuffer<CR>
+    nnoremap <leader>pt :CtrlPTag<CR>
 
     let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+      \ 'dir':  '\v[\/](\.(git|hg|svn)|__pycache__|venv)$',
       \ 'file': '\v\.(exe|so|dll)$',
       \ 'link': 'some_bad_symbolic_links',
       \ }

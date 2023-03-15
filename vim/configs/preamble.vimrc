@@ -39,7 +39,7 @@ vnoremap <F1> :set invfullscreen<CR>
 
 " Other
 nnoremap <leader>st :call whitespace#strip_trailing()<CR>
-noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+noremap <silent> <leader>V :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " in case you forgot to sudo
 cnoremap w!! %!sudo tee > /dev/null %
