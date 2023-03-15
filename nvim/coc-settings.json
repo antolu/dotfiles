@@ -8,8 +8,9 @@
     "python.linting.flake8Args": [
         "--max-line-length=79",
         "--ignore=E203,E266,E501,W503,F403,F401",
-        "--ignore-long-lines='<?https?://\S+>?$'"
+        "--ignore-long-lines='<?https?://\\S+>?$'"
     ],
+    "python.linting.mypyEnabled": true,
     "python.linting.pydocstyleEnabled": true,
     "python.sortImports.args": [
         "--line-length",
@@ -17,6 +18,8 @@
         "--profile",
         "black"
     ],
-    "python.organizeimports.provider": "isort",
+    "pyright.inlayHints.variableTypes": false,
+    "pyright.inlayHints.functionReturnTypes": false,
+    "pyright.organizeimports.provider": "isort",
     "pyright.testing.provider": "pytest"
 }

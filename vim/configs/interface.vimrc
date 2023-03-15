@@ -9,7 +9,9 @@ endif
 " Tagbar
 "{{{
     Plug 'majutsushi/tagbar'
-    nmap <leader>tb :TagbarToggle<CR>
+    nmap <leader>tb :TagbarOpen [fj]<CR>
+    nmap <leader>tc :TagbarClose<CR>
+    nmap <leader>tp :TagbarPauseToggle<CR>
 " }}}
 
 " UI Plugins
