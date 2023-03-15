@@ -9,6 +9,8 @@
 [user]
 	email = anton96lu@gmail.com
 	name = Anton Lu
+[includeIf "gitdir:~/code/cern/"]
+    path = ~/.gitconfig-cern
 [core]
 	autocrlf = input
 	editor = vim
