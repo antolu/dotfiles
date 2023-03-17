@@ -235,6 +235,15 @@ nnoremap <leader>pe :lprevious<CR>
     nnoremap <leader>ft <cmd>lua require('telescope.builtin').tags()<cr>
 " }}}
 
+" treesitter
+" {{{
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'nvim-treesitter/playground'
+    Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+    Plug 'nvim-treesitter/nvim-treesitter-refactor'
+    Plug 'nvim-treesitter/nvim-treesitter-context'
+" }}}
+
 " gitsigns.nvim
 " {{{
     Plug 'lewis6991/gitsigns.nvim'
@@ -254,11 +263,31 @@ nnoremap <leader>pe :lprevious<CR>
 " {{{
     Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
     Plug 'sonph/onehalf', {'rtp': 'vim/'}
+    Plug 'joshdick/onedark.vim'
+    Plug 'altercation/vim-colors-solarized'
 " }}}
 
 call plug#end()
 
-colorscheme onehalflight
+" Theme
+" {{{
+    " "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+    "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+    "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+    if (empty($TMUX))
+      if (has("nvim"))
+        "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+        let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+      endif
+      "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+      "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+      " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+      if (has("termguicolors"))
+        set termguicolors
+      endif
+    endif
+" }}}
+colorscheme solarized
 
 lua<<EOF
 require("gitsigns").setup {
@@ -327,4 +356,53 @@ vim.keymap.set('', 'T', function()
 end, {remap=true})
 EOF
 
+lua <<EOF
+require('nvim-treesitter.configs').setup {
+  ensure_installed = {"vim", "bash", "c", "cpp", "dockerfile", "html", "javascript", "json", "lua", "python", "regex", "toml", "typescript", "yaml"},
+  highlight = {
+    enable = true,
+  },
+  indent = {
+    enable = true
+  },
+  textsubjects = {
+    enable = true,
+    keymaps = {
+      ['.'] = 'textsubjects-smart',
+      [';'] = 'textsubjects-container-outer',
+    }
+  },
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true,
+      keymaps = {
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+      },
+    },
+    move = {
+      enable = true,
+      set_jumps = true,
+      goto_next_start = {
+        ["]m"] = "@function.outer",
+        ["]]"] = "@class.outer",
+      },
+      goto_next_end = {
+        ["]M"] = "@function.outer",
+        ["]["] = "@class.outer",
+      },
+      goto_previous_start = {
+        ["[m"] = "@function.outer",
+        ["[["] = "@class.outer",
+      },
+      goto_previous_end = {
+        ["[M"] = "@function.outer",
+        ["[]"] = "@class.outer",
+      },
+    },
+  },
+}
 
