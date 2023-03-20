@@ -123,6 +123,9 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 
     Plug 'windwp/nvim-autopairs'
     Plug 'ThePrimeagen/refactoring.nvim'
+    
+    Plug 'zbirenbaum/copilot.lua'
+    Plug 'zbirenbaum/copilot-cmp'
 " }}}
 
 " theme
@@ -176,3 +179,4 @@ lua require('plugins.configs.trouble').setup()
 lua require('plugins.configs.aerial').setup()
 lua require('plugins.configs.alpha').setup()
 lua require('plugins.configs.diagnostic').setup()
+lua require('plugins.configs.copilot').setup()

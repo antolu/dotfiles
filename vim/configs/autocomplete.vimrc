@@ -1,5 +1,6 @@
 " Autocomplete
 " {{{
+if !has('nvim')
     Plug 'github/copilot.vim'
 
     imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
@@ -9,5 +10,6 @@
     " imap <silent> <C-[> <Plug>(copilot-previous)
 
     let g:copilot_no_tab_map = v:true
+endif
 " }}}
 

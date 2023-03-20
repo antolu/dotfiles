@@ -47,10 +47,10 @@ linkConfigs() {
 		ln -sf $file			~/.vim/configs/$(basename $file)
 	done
 
-    mkdir -p ~/.config/nvim/lua/plugins
+    mkdir -p ~/.config/nvim/lua/plugins/configs
     ln -sf $SCRIPT_DIR/nvim/init.vim ~/.config/nvim/init.vim
-    for file in $SCRIPT_DIR/nvim/lua/plugins/*; do
-        ln -sf $file            ~/.config/nvim/lua/plugins/$(basename $file)
+    for file in $SCRIPT_DIR/nvim/lua/plugins/configs/*; do
+        ln -sf $file            ~/.config/nvim/lua/plugins/configs/$(basename $file)
     done
 }
 
