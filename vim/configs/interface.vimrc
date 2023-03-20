@@ -19,11 +19,6 @@ endif
     Plug 'ryanoasis/vim-devicons'
 " }}}
 
-" Key mappings
-" {{{
-    Plug 'liuchengxu/vim-which-key'
-" }}}
-
 " Status bar
 set laststatus=2
 

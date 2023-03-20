@@ -47,9 +47,11 @@ linkConfigs() {
 		ln -sf $file			~/.vim/configs/$(basename $file)
 	done
 
-    mkdir -p ~/.config/nvim
+    mkdir -p ~/.config/nvim/lua/plugins
     ln -sf $SCRIPT_DIR/nvim/init.vim ~/.config/nvim/init.vim
-    ln -sf $SCRIPT_DIR/nvim/coc-settings.json ~/.config/nvim/coc-settings.json
+    for file in $SCRIPT_DIR/nvim/lua/plugins/*; do
+        ln -sf $file            ~/.config/nvim/lua/plugins/$(basename $file)
+    done
 }
 
 installFzfModule() {
