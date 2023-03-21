@@ -7,6 +7,7 @@ local mason = require('mason')
 local mason_lsp = require('mason-lspconfig')
 local navic = require('nvim-navic')
 local wk = require('which-key')
+local code_action_menu = require('code_action_menu')
 
 local function set_commands()
     -- Commands.

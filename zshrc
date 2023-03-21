@@ -56,6 +56,14 @@ alias socks-proxy='ssh -L 9090:localhost:9090 lxplus'
 #
 # ============================================================================
 
+smallestfiles() {
+    if [[ -z "$1" ]]; then
+        echo "usage: smallestfiles <dir>"
+        return 1
+    fi
+    find . -maxdepth 1 -type f -printf "%s %f\0" | sort -z -n | head -z -n $1 | cut -z -d ' ' -f 2- | tr '\0' '\n'
+}
+
 mkc () {
 	mkdir -p "$1"
 	cd "$1"

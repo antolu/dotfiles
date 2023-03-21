@@ -126,6 +126,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
     
     Plug 'zbirenbaum/copilot.lua'
     Plug 'zbirenbaum/copilot-cmp'
+    Plug 'weilbith/nvim-code-action-menu'
 " }}}
 
 " theme
