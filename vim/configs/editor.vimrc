@@ -10,6 +10,7 @@
 
 " Syntax highlighting
 " {{{
+if !has('nvim')
     Plug 'scrooloose/syntastic'
 
     set statusline+=%#warningmsg#
@@ -22,6 +23,7 @@
     let g:syntastic_check_on_wq = 0
 
     Plug 'dense-analysis/ale'
+endif
 " }}}
 
 if !has('nvim')

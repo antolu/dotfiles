@@ -2,14 +2,16 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/.vimrc
 
-nnoremap <leader>ne :lnext<CR>
-nnoremap <leader>pe :lprevious<CR>
-
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && v:this_session == "" | Alpha | endif
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | Alpha | endif
 
 " {{{
     Plug 'goolord/alpha-nvim'
+    Plug 'edluffy/specs.nvim'
+    Plug 'petertriho/nvim-scrollbar'
+    Plug 'kevinhwang91/nvim-hlslens'
+    Plug 'yorickpeterse/nvim-window'
+    Plug 'romgrk/barbar.nvim'
 " }}}
 
 " Tags
@@ -43,6 +45,12 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
     " Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 
     " let g:pymode_lint_cwindow=0
+" }}}
+
+" nvim tree
+" {{{
+    Plug 'nvim-tree/nvim-tree.lua'
+    Plug 'nvim-tree/nvim-web-devicons'
 " }}}
 
 " fzf
@@ -127,6 +135,9 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
     Plug 'zbirenbaum/copilot.lua'
     Plug 'zbirenbaum/copilot-cmp'
     Plug 'weilbith/nvim-code-action-menu'
+
+    Plug 'kosayoda/nvim-lightbulb'
+    Plug 'antoinemadec/FixCursorHold.nvim'
 " }}}
 
 " theme
@@ -161,6 +172,8 @@ colorscheme onedark
 lua require('leap').add_default_mappings()
 lua require('mason').setup()
 lua require('mason-lspconfig').setup({automatic_installation = true,})
+lua require('nvim-lightbulb').setup({autocmd = {enable = true}})
+lua require('which-key').setup({disable = {buftypes = {'cmdline'}}})
 
 lua require('plugins.configs.gitsigns').setup()
 lua require('plugins.configs.hop').setup()
@@ -181,3 +194,8 @@ lua require('plugins.configs.aerial').setup()
 lua require('plugins.configs.alpha').setup()
 lua require('plugins.configs.diagnostic').setup()
 lua require('plugins.configs.copilot').setup()
+lua require('plugins.configs.nvim-tree').setup()
+lua require('plugins.configs.specs').setup()
+lua require('plugins.configs.scrollbar').setup()
+lua require('plugins.configs.nvim-window').setup()
+lua require('plugins.configs.barbar').setup()

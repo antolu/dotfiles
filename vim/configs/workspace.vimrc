@@ -5,6 +5,7 @@
 
 " NerdTree
 " {{{
+if !has('nvim')
     Plug 'preservim/nerdtree'
     Plug 'jistr/vim-nerdtree-tabs'
     " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -33,12 +34,15 @@
           execute ':NERDTreeFind'
         endif
     endfunction
+endif
 " }}}
 
 " Workspace
 " {{{
+if !has('nvim')
     Plug 'tpope/vim-obsession'
     let g:workspace_session_directory = $HOME . '/.vim/sessions/'
+endif
 " }}}
 
 " Fuzzy file search
