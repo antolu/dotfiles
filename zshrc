@@ -78,7 +78,36 @@ user_dir = path.expanduser("~")
 if directory.startswith(user_dir):
     dest_dir = directory[len(user_dir)+1:]
 
-command = "rsync -avzP --exclude-from={}/.syncignore {}/ {}:{}/".format(user_dir, directory, hostname, dest_dir)
+command = "rsync -azuzP --exclude-from={}/.syncignore {}/ {}:{}/".format(user_dir, directory, hostname, dest_dir)
+print(command)
+EOF
+)
+
+eval $cmd
+}
+
+syncfrom () {
+    if [[  -z "$1" ]]; then
+        echo "usage: syncfrom <user>@<host> <dir>"
+        return 1
+    fi
+
+    cmd=$(python3 <<EOF
+import os
+from os import path
+
+hostname = "$1"
+directory = "$2"
+
+if directory == "":
+    directory = os.getcwd()
+
+user_dir = path.expanduser("~")
+
+if directory.startswith(user_dir):
+    source_dir = directory[len(user_dir)+1:]
+
+command = "rsync -azuzP --exclude-from={}/.syncignore {}:{}/ {}/".format(user_dir, hostname, source_dir, directory)
 print(command)
 EOF
 )
