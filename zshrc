@@ -38,8 +38,9 @@ alias please='sudo'
 alias svim='sudo vim'
 alias wifi="nmcli d wifi"
 alias windows='sudo nextboot Microsoft && sudo reboot'
+alias cernvmproxy='ssh -L 5901:localhost:5901 vm-cc7'
 alias cernproxy='ssh -N -D 9090 lxplus'
-alias cernvmproxy='ssh -L 5901:localhost:5901 cernvm2'
+alias japcproxy='ssh -L 9091:localhost:9091 vm-cc7'
 alias ibrew="arch -x86_64 /usr/local/bin/brew"
 
 alias srestart='sudo systemctl restart'
@@ -55,6 +56,35 @@ alias socks-proxy='ssh -L 9090:localhost:9090 lxplus'
 # Functions 
 #
 # ============================================================================
+
+syncto () {
+    if [[  -z "$1" ]]; then
+        echo "usage: syncto <user>@<host> <dir>"
+        return 1
+    fi
+    cmd=$(
+    python3 <<EOF
+import os
+from os import path
+
+hostname = "$1"
+directory = "$2"
+
+if directory == "":
+    directory = os.getcwd()
+
+user_dir = path.expanduser("~")
+
+if directory.startswith(user_dir):
+    dest_dir = directory[len(user_dir)+1:]
+
+command = "rsync -avzP --exclude-from={}/.syncignore {}/ {}:{}/".format(user_dir, directory, hostname, dest_dir)
+print(command)
+EOF
+)
+
+eval $cmd
+}
 
 smallestfiles() {
     if [[ -z "$1" ]]; then

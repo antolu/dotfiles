@@ -120,6 +120,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 " {{{
     Plug 'neovim/nvim-lspconfig'
     Plug 'williamboman/mason-lspconfig.nvim'
+    Plug 'nvim-lua/lsp-status.nvim'
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-buffer'
     Plug 'hrsh7th/cmp-path'
@@ -169,12 +170,19 @@ call plug#end()
 " }}}
 colorscheme onedark
 
+lua require("vim.lsp.log").set_format_func(vim.inspect)
+
 lua require('leap').add_default_mappings()
 lua require('mason').setup()
 lua require('mason-lspconfig').setup({automatic_installation = true,})
 lua require('nvim-lightbulb').setup({autocmd = {enable = true}})
 lua require('which-key').setup({disable = {buftypes = {'cmdline'}}})
 
+lua require('plugins.configs.aerial').setup()
+lua require('plugins.configs.alpha').setup()
+lua require('plugins.configs.barbar').setup()
+lua require('plugins.configs.copilot').setup()
+lua require('plugins.configs.diagnostic').setup()
 lua require('plugins.configs.gitsigns').setup()
 lua require('plugins.configs.hop').setup()
 lua require('plugins.configs.lsp-format').setup()
@@ -184,18 +192,13 @@ lua require('plugins.configs.luasnip').setup()
 lua require('plugins.configs.null-ls').setup()
 lua require('plugins.configs.nvim-autopairs').setup()
 lua require('plugins.configs.nvim-cmp').setup()
+lua require('plugins.configs.nvim-tree').setup()
 lua require('plugins.configs.nvim-treesitter-textobjects').setup()
 lua require('plugins.configs.nvim-treesitter').setup()
+lua require('plugins.configs.nvim-window').setup()
 lua require('plugins.configs.refactoring').setup()
+lua require('plugins.configs.scrollbar').setup()
+lua require('plugins.configs.specs').setup()
 lua require('plugins.configs.syntax-tree-surfer').setup()
 lua require('plugins.configs.telescope').setup()
 lua require('plugins.configs.trouble').setup()
-lua require('plugins.configs.aerial').setup()
-lua require('plugins.configs.alpha').setup()
-lua require('plugins.configs.diagnostic').setup()
-lua require('plugins.configs.copilot').setup()
-lua require('plugins.configs.nvim-tree').setup()
-lua require('plugins.configs.specs').setup()
-lua require('plugins.configs.scrollbar').setup()
-lua require('plugins.configs.nvim-window').setup()
-lua require('plugins.configs.barbar').setup()
