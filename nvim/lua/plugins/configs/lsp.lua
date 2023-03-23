@@ -101,6 +101,7 @@ function M.setup()
         on_attach = M.on_attach,
         settings = {
             pylsp = {
+                configurationSources = {"flake8"},
                 plugins = {
                     autopep8 = {
                         enabled = false,
@@ -115,7 +116,7 @@ function M.setup()
                         line_length = 79,
                     },
                     flake8 = {
-                        enabled = false,
+                        enabled = true,
                         ignore = { "E203", "E266", "E501", "W503", "F401", "F403" },
                         maxLineLength = 79,
                         maxComplexity = 18,
