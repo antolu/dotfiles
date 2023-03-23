@@ -2,7 +2,7 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/.vimrc
 
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && v:this_session == "" | Alpha | endif
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && v:this_session == "" | Alpha | endif
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | Alpha | endif
 
 " {{{
@@ -12,6 +12,9 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
     Plug 'kevinhwang91/nvim-hlslens'
     Plug 'yorickpeterse/nvim-window'
     Plug 'romgrk/barbar.nvim'
+
+    Plug 'rmagatti/auto-session'
+    Plug 'rmagatti/session-lens'
 " }}}
 
 " Tags
@@ -198,6 +201,7 @@ lua require('plugins.configs.nvim-treesitter').setup()
 lua require('plugins.configs.nvim-window').setup()
 lua require('plugins.configs.refactoring').setup()
 lua require('plugins.configs.scrollbar').setup()
+lua require('plugins.configs.session').setup()
 lua require('plugins.configs.specs').setup()
 lua require('plugins.configs.syntax-tree-surfer').setup()
 lua require('plugins.configs.telescope').setup()
