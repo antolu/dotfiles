@@ -96,6 +96,20 @@ end
 
 function M.setup()
     set_capabilities()
+
+    mason.setup()
+    mason_lsp.setup()
+
+    mason_lsp.setup_handlers({
+        function(server_name) -- default handler (optional)
+            require("lspconfig")[server_name].setup({
+                capabilities = M.capabilities,
+                on_attach = M.on_attach,
+            })
+        end,
+    })
+
+
     nvim_lsp.pylsp.setup({
         capabilities = M.capabilities,
         on_attach = M.on_attach,
@@ -113,6 +127,15 @@ function M.setup()
                         enabled = true,
                         profile = "black",
                         line_length = 79,
+                    },
+                    jedi_completion = {
+                        enabled = true,
+                    },
+                    jedi_symbols = {
+                        enabled = true,
+                    },
+                    jedi_definition = {
+                        enabled = true,
                     },
                     flake8 = {
                         enabled = true,
@@ -158,38 +181,9 @@ function M.setup()
             },
         },
     })
-    -- nvim_lsp.pyright.setup({
-    --     capabilities = M.capabilities,
-    --     on_attach = M.on_attach,
-    --     settings = {
-    --         pyright = {
-    --                 disableOrganizeImports = true,
-    --         },
-    --         python = {
-    --             analysis = {
-    --                 autoSearchPaths = true,
-    --                 useLibraryCodeForTypes = true,
-    --                 typeCheckingMode = "off",
-    --                 disableOrganizeImports = true,
-    --             },
-    --         },
-    --     },
-    -- })
     nvim_lsp.vimls.setup({
         capabilities = M.capabilities,
         on_attach = M.on_attach,
-    })
-
-    mason.setup()
-    mason_lsp.setup()
-
-    mason_lsp.setup_handlers({
-        function(server_name) -- default handler (optional)
-            require("lspconfig")[server_name].setup({
-                capabilities = M.capabilities,
-                on_attach = M.on_attach,
-            })
-        end,
     })
 end
 
