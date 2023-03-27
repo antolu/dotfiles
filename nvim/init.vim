@@ -2,8 +2,8 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/.vimrc
 
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && v:this_session == "" | Alpha | endif
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | Alpha | endif
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && v:this_session == "" | Alpha | endif
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | wincmd p | ene | exe 'cd '.argv()[0] | Alpha | endif
 
 " {{{
     Plug 'goolord/alpha-nvim'
@@ -11,7 +11,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
     Plug 'petertriho/nvim-scrollbar'
     Plug 'kevinhwang91/nvim-hlslens'
     Plug 'yorickpeterse/nvim-window'
-    Plug 'romgrk/barbar.nvim'
+    " Plug 'romgrk/barbar.nvim'
 
     Plug 'rmagatti/auto-session'
     Plug 'rmagatti/session-lens'
@@ -52,7 +52,9 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 
 " nvim tree
 " {{{
-    Plug 'nvim-tree/nvim-tree.lua'
+    " Plug 'nvim-tree/nvim-tree.lua'
+    Plug 'nvim-neo-tree/neo-tree.nvim'
+    Plug 'MunifTanjim/nui.nvim'
     Plug 'nvim-tree/nvim-web-devicons'
 " }}}
 
@@ -183,7 +185,7 @@ lua require('which-key').setup({disable = {buftypes = {'cmdline'}}})
 
 lua require('plugins.configs.aerial').setup()
 lua require('plugins.configs.alpha').setup()
-lua require('plugins.configs.barbar').setup()
+" lua require('plugins.configs.barbar').setup()
 lua require('plugins.configs.copilot').setup()
 lua require('plugins.configs.diagnostic').setup()
 lua require('plugins.configs.gitsigns').setup()
@@ -195,7 +197,8 @@ lua require('plugins.configs.luasnip').setup()
 lua require('plugins.configs.null-ls').setup()
 lua require('plugins.configs.nvim-autopairs').setup()
 lua require('plugins.configs.nvim-cmp').setup()
-lua require('plugins.configs.nvim-tree').setup()
+" lua require('plugins.configs.nvim-tree').setup()
+lua require('plugins.configs.neo-tree').setup()
 lua require('plugins.configs.nvim-treesitter-textobjects').setup()
 lua require('plugins.configs.nvim-treesitter').setup()
 lua require('plugins.configs.nvim-window').setup()

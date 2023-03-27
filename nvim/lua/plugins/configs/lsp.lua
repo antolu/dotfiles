@@ -172,7 +172,7 @@ function M.setup()
                         enabled = true,
                     },
                     rope_completion = {
-                        enabled = true,
+                        enabled = false,
                     },
                     yapf = {
                         enabled = false,

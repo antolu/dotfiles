@@ -38,10 +38,10 @@ local function set_keymaps(bufnr)
 				["l"] = { "<Cmd>BufferOrderByLanguage<CR>", "Sort by language" },
 				["w"] = { "<Cmd>BufferOrderByWindowNumber<CR>", "Sort by window number" },
 			},
+        },
     {
         prefix = "<leader>b",
         buffer = bufnr,
-    }
     })
     wk.register({
         ["b"] = { "<Cmd>BufferPick<CR>", "Pick buffer" },
