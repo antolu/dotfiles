@@ -5,6 +5,8 @@ local session = require("auto-session")
 function M.setup()
     session.setup {
         log_level = "error",
+        auto_restore_enabled = false,
+        auto_session_enable_last_session = false,
 
         cwd_change_handling = {
             restore_upcoming_session = true,   -- already the default, no need to specify like this, only here as an example
