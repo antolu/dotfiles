@@ -48,7 +48,7 @@ alias sstatus='sudo systemctl status'
 alias sstart='sudo systemctl start'
 alias sstop='sudo systemctl stop'
 
-alias source-accpy='source /opt/acc-py/base/2021.12/setup.sh'
+alias source-accpy='source /acc/local/share/python/acc-py/pro/setup.sh'
 alias socks-proxy='ssh -L 9090:localhost:9090 lxplus'
 
 # ============================================================================
@@ -121,6 +121,12 @@ smallestfiles() {
         return 1
     fi
     find . -maxdepth 1 -type f -printf "%s %f\0" | sort -z -n | head -z -n $1 | cut -z -d ' ' -f 2- | tr '\0' '\n'
+}
+
+vminternetproxy () {
+    source ~/venv/bin/activate
+    ssh -D 9091 -f -C -N lxplus &
+    pproxy -r socks://localhost:9091 #--daemon
 }
 
 mkc () {
