@@ -4,8 +4,6 @@
 	insteadOf = "gh:"
 [url "git@github.com:"]
 	pushInsteadOf = "gh:"
-[url "git@gitlab.haochen.lu:"]
-	insteadOf = "gl:"
 [user]
 	email = anton96lu@gmail.com
 	name = Anton Lu
