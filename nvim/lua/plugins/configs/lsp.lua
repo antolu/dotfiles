@@ -100,14 +100,14 @@ function M.setup()
     mason.setup()
     mason_lsp.setup()
 
-    mason_lsp.setup_handlers({
-        function(server_name) -- default handler (optional)
-            require("lspconfig")[server_name].setup({
-                capabilities = M.capabilities,
-                on_attach = M.on_attach,
-            })
-        end,
-    })
+    -- mason_lsp.setup_handlers({
+    --     function(server_name) -- default handler (optional)
+    --         require("lspconfig")[server_name].setup({
+    --             capabilities = M.capabilities,
+    --             on_attach = M.on_attach,
+    --         })
+    --     end,
+    -- })
 
 
     nvim_lsp.pylsp.setup({
@@ -119,15 +119,6 @@ function M.setup()
                     autopep8 = {
                         enabled = false,
                     },
-                    black = {
-                        enabled = true,
-                        line_length = 79,
-                    },
-                    isort = {
-                        enabled = true,
-                        profile = "black",
-                        line_length = 79,
-                    },
                     jedi_completion = {
                         enabled = true,
                     },
@@ -136,18 +127,6 @@ function M.setup()
                     },
                     jedi_definition = {
                         enabled = true,
-                    },
-                    flake8 = {
-                        enabled = true,
-                        ignore = { "E203", "E266", "E501", "W503", "F401", "F403" },
-                        maxLineLength = 79,
-                        maxComplexity = 18,
-                        select = { "B", "C", "E", "F", "W", "T4", "B9" },
-                    },
-                    pylsp_mypy = {
-                        enabled = true,
-                        config_sub_paths = {},
-                        overrides = { "--config-path=pyproject.toml" }
                     },
                     pydocstyle = {
                         enabled = true,
@@ -172,10 +151,13 @@ function M.setup()
                         enabled = true,
                     },
                     rope_completion = {
-                        enabled = false,
+                        enabled = true,
                     },
                     yapf = {
                         enabled = false,
+                    },
+                    ruff = {
+                        enabled = true,
                     },
                 },
             },
