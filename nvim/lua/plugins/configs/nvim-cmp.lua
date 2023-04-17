@@ -31,7 +31,7 @@ function M.setup()
             }), {"i", "c"}),
             ['<C-e>'] = cmp.mapping.close(),
             ['<CR>'] = cmp.mapping.confirm({
-                select = true,
+                select = false,
                 behavior = cmp.ConfirmBehavior.Replace,
             }),
             ["<Tab>"] = vim.schedule_wrap(function(fallback)
@@ -72,6 +72,9 @@ function M.setup()
                     symbol_map = { Copilot = "" }
                 })
             }),
+        },
+        formatters = {
+            insert_text = require("copilot_cmp.format").remove_existing
         },
         sorting = {
             priority_weight = 2,
