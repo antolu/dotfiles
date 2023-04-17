@@ -19,13 +19,13 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 
 " Tags
 " {{{
-    Plug 'ludovicchabant/vim-gutentags'
-    Plug 'skywind3000/gutentags_plus'
+    " Plug 'ludovicchabant/vim-gutentags'
+    " Plug 'skywind3000/gutentags_plus'
     
-    let g:gutentags_ctags_tagfile = '.tags'
-    let g:gutentags_modules = ['ctags', 'gtags_cscope']
-    let g:gutentags_project_root = ['.use_tags']
-    let g:gutentags_cache_dir = expand('~/.cache/tags')
+    " let g:gutentags_ctags_tagfile = '.tags'
+    " let g:gutentags_modules = ['ctags', 'gtags_cscope']
+    " let g:gutentags_project_root = ['.use_tags']
+    " let g:gutentags_cache_dir = expand('~/.cache/tags')
 " }}}
 
 " Python debugging

@@ -1,5 +1,6 @@
 local M = {}
 
+local copilot = require("copilot")
 local cmp = require('cmp')
 local lspkind = require('lspkind')
 local luasnip = require('luasnip')
@@ -13,6 +14,11 @@ end
 vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 
 function M.setup()
+    copilot.setup({
+        formatters = {
+            insert_text = require("copilot_cmp.format").remove_existing
+        },
+    })
     cmp.setup({
         snippet = {
             expand = function(args)
@@ -31,7 +37,7 @@ function M.setup()
             }), {"i", "c"}),
             ['<C-e>'] = cmp.mapping.close(),
             ['<CR>'] = cmp.mapping.confirm({
-                select = true,
+                select = false,
                 behavior = cmp.ConfirmBehavior.Replace,
             }),
             ["<Tab>"] = vim.schedule_wrap(function(fallback)
