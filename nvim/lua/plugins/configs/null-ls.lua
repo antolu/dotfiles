@@ -11,12 +11,15 @@ function M.setup()
 
 	null_ls.setup({
 		sources = {
+			code_actions.refactoring,
 			diagnostics.codespell,
 			diagnostics.flake8,
-            --diagnostics.mypy,
+			diagnostics.mypy,
 			--completion.tags,
 			formatting.black,
 			formatting.isort,
+			formatting.ruff,
+			formatting.stylua,
 			-- diagnostics.eslint_d,
 			-- code_actions.eslint_d,
 			-- formatting.prettierd,

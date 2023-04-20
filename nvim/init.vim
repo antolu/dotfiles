@@ -11,43 +11,16 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
     Plug 'petertriho/nvim-scrollbar'
     Plug 'kevinhwang91/nvim-hlslens'
     Plug 'yorickpeterse/nvim-window'
-    " Plug 'romgrk/barbar.nvim'
 
     Plug 'rmagatti/auto-session'
     Plug 'rmagatti/session-lens'
-" }}}
 
-" Tags
-" {{{
-    " Plug 'ludovicchabant/vim-gutentags'
-    " Plug 'skywind3000/gutentags_plus'
+    Plug 'RRethy/vim-illuminate'
     
-    " let g:gutentags_ctags_tagfile = '.tags'
-    " let g:gutentags_modules = ['ctags', 'gtags_cscope']
-    " let g:gutentags_project_root = ['.use_tags']
-    " let g:gutentags_cache_dir = expand('~/.cache/tags')
-" }}}
+    Plug 'folke/noice.nvim'
+    Plug 'MunifTanjim/nui.nvim'
+    Plug 'rcarriga/nvim-notify'
 
-" Python debugging
-" {{{
-    " Plug 'puremourning/vimspector'
-    " nnoremap <F5> :call vimspector#Launch()<CR>
-    " nnoremap <Leader>de :call vimspector#Reset()<CR>
-    " nnoremap <Leader>dc :call vimspector#Continue()<CR>
-
-    " nnoremap <Leader>dt :call vimspector#ToggleBreakpoint()<CR>
-    " nnoremap <Leader>dT :call vimspector#ClearBreakpoints()<CR>
-
-    " nmap <Leader>dr <Plug>VimspectorRestart
-    " nmap <F9> <Plug>VimspectorStepOut
-    " nmap <F7> <Plug>VimspectorStepInto
-    " nmap <F8> <Plug>VimspectorStepOver
-
-    " let g:vimspector_enable_mappings = 'HUMAN'
-
-    " Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-
-    " let g:pymode_lint_cwindow=0
 " }}}
 
 " nvim tree
@@ -60,22 +33,15 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 
 " fzf
 " {{{
-
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
 
     let g:fzf_nvim_statusline = 0 " disable statusline overwriting
-
-    nnoremap <silent> <leader>o :BTags<CR>
-    nnoremap <silent> <leader>ft :BTags<CR>
-    nnoremap <silent> <leader>O :Tags<CR>
-    " nnoremap <silent> <leader>fh :Helptags<CR>
 " }}}
 
 " lualine
 " {{{
     Plug 'nvim-lualine/lualine.nvim'
-    Plug 'kyazdani42/nvim-web-devicons'
     Plug 'SmiteshP/nvim-navic'
 " }}}
 
@@ -185,7 +151,6 @@ lua require('which-key').setup({disable = {buftypes = {'cmdline'}}})
 
 lua require('plugins.configs.aerial').setup()
 lua require('plugins.configs.alpha').setup()
-" lua require('plugins.configs.barbar').setup()
 lua require('plugins.configs.copilot').setup()
 lua require('plugins.configs.diagnostic').setup()
 lua require('plugins.configs.gitsigns').setup()
@@ -194,10 +159,10 @@ lua require('plugins.configs.lsp-format').setup()
 lua require('plugins.configs.lsp').setup()
 lua require('plugins.configs.lualine').setup()
 lua require('plugins.configs.luasnip').setup()
+lua require('plugins.configs.noice').setup()
 lua require('plugins.configs.null-ls').setup()
 lua require('plugins.configs.nvim-autopairs').setup()
 lua require('plugins.configs.nvim-cmp').setup()
-" lua require('plugins.configs.nvim-tree').setup()
 lua require('plugins.configs.neo-tree').setup()
 lua require('plugins.configs.nvim-treesitter-textobjects').setup()
 lua require('plugins.configs.nvim-treesitter').setup()
