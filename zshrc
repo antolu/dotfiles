@@ -124,7 +124,7 @@ smallestfiles() {
 }
 
 vminternetproxy () {
-    source ~/venv/bin/activate
+    source ~/.venv/bin/activate
     ssh -D 9091 -f -C -N lxplus &
     pproxy -r socks://localhost:9091 #--daemon
 }
