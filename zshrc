@@ -60,6 +60,31 @@ alias jump-rhel="ssh -XY -tt vm-el9 'zsh -l'"
 #
 # ============================================================================
 
+VENVDIR=~/.venvs
+
+srcvenv() {
+    if [[ -z "$1" ]]; then
+        echo "usage: srcvenv [venv-name]"
+        return 1
+    fi
+    venv_dir=$VENVDIR/$1
+
+    if [ ! -d $venv_dir ]; then
+        echo "$1 is not a valid venv in $VENVDIR"
+        return 2
+    fi
+
+    if [[ ! -z $VIRTUAL_ENV ]]; then
+        echo "Deactivating venv in $VIRTUAL_ENV"
+        deactivate
+    fi
+
+    echo "Sourcing venv in $venv_dir"
+    source $venv_dir/bin/activate
+    
+    echo "Done!"
+}
+
 syncto () {
     if [[  -z "$1" ]]; then
         echo "usage: syncto <user>@<host> <dir>"
