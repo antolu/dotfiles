@@ -19,7 +19,7 @@ fi
 
 # ============================================================================
 # 
-# Enviromnent variables
+# Environment variables
 #
 # ============================================================================
 
@@ -50,6 +50,9 @@ alias sstop='sudo systemctl stop'
 
 alias source-accpy='source /acc/local/share/python/acc-py/pro/setup.sh'
 alias socks-proxy='ssh -L 9090:localhost:9090 lxplus'
+alias jump-ml001="ssh -XY  -tt ml1 'zsh -l'"
+alias jump-ml002="ssh -XY -tt ml2 'zsh -l'"
+alias jump-rhel="ssh -XY -tt vm-el9 'zsh -l'"
 
 # ============================================================================
 # 
