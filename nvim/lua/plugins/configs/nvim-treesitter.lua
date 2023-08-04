@@ -11,7 +11,6 @@ function M.setup()
       "cmake", 
       "cpp",
       "dockerfile",
-      "help",
       "html",
       "javascript",
       "json",

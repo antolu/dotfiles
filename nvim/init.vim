@@ -141,7 +141,7 @@ call plug#end()
 " }}}
 colorscheme onedark
 
-lua require("vim.lsp.log").set_format_func(vim.inspect)
+" lua require("vim.lsp.log").set_format_func(vim.inspect)
 
 lua require('leap').add_default_mappings()
 lua require('mason').setup()

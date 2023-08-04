@@ -19,7 +19,7 @@ fi
 
 # ============================================================================
 # 
-# Enviromnent variables
+# Environment variables
 #
 # ============================================================================
 
@@ -50,12 +50,40 @@ alias sstop='sudo systemctl stop'
 
 alias source-accpy='source /acc/local/share/python/acc-py/pro/setup.sh'
 alias socks-proxy='ssh -L 9090:localhost:9090 lxplus'
+alias jump-ml001="ssh -XY  -tt ml1 'zsh -l'"
+alias jump-ml002="ssh -XY -tt ml2 'zsh -l'"
+alias jump-rhel="ssh -XY -tt vm-el9 'zsh -l'"
 
 # ============================================================================
 # 
 # Functions 
 #
 # ============================================================================
+
+VENVDIR=~/.venvs
+
+srcvenv() {
+    if [[ -z "$1" ]]; then
+        echo "usage: srcvenv [venv-name]"
+        return 1
+    fi
+    venv_dir=$VENVDIR/$1
+
+    if [ ! -d $venv_dir ]; then
+        echo "$1 is not a valid venv in $VENVDIR"
+        return 2
+    fi
+
+    if [[ ! -z $VIRTUAL_ENV ]]; then
+        echo "Deactivating venv in $VIRTUAL_ENV"
+        deactivate
+    fi
+
+    echo "Sourcing venv in $venv_dir"
+    source $venv_dir/bin/activate
+    
+    echo "Done!"
+}
 
 syncto () {
     if [[  -z "$1" ]]; then
