@@ -62,13 +62,24 @@ syncto () {
         echo "usage: syncto <user>@<host> <dir>"
         return 1
     fi
+    if [[ "$2" -eq "-d" || "$2" -eq "--delete" ]]; then
+        delete="--delete"
+        directory=""
+    else
+        directory="$2"
+        delete=""
+
+        if [[ "$3" == "-d" || "$3" == "--delete" ]]; then
+            delete="--delete"
+        fi
+    fi
     cmd=$(
     python3 <<EOF
 import os
 from os import path
 
 hostname = "$1"
-directory = "$2"
+directory = "$directory"
 
 if directory == "":
     directory = os.getcwd()
@@ -77,8 +88,10 @@ user_dir = path.expanduser("~")
 
 if directory.startswith(user_dir):
     dest_dir = directory[len(user_dir)+1:]
+else:
+    dest_dir = directory
 
-command = "rsync -azuzP --exclude-from={}/.syncignore {}/ {}:{}/".format(user_dir, directory, hostname, dest_dir)
+command = "rsync -azuzP $delete --exclude-from={}/.syncignore {}/ {}:{}/".format(user_dir, directory, hostname, dest_dir)
 print(command)
 EOF
 )
@@ -91,13 +104,23 @@ syncfrom () {
         echo "usage: syncfrom <user>@<host> <dir>"
         return 1
     fi
+    if [[ "$2" == "-d" || "$2" == "--delete" ]]; then
+        delete="--delete"
+        directory=""
+    else
+        directory="$2"
+        delete=""
 
+        if [[ "$3" == "-d" || "$3" == "--delete" ]]; then
+            delete="--delete"
+        fi
+    fi
     cmd=$(python3 <<EOF
 import os
 from os import path
 
 hostname = "$1"
-directory = "$2"
+directory = "$directory"
 
 if directory == "":
     directory = os.getcwd()
@@ -107,7 +130,7 @@ user_dir = path.expanduser("~")
 if directory.startswith(user_dir):
     source_dir = directory[len(user_dir)+1:]
 
-command = "rsync -azuzP --exclude-from={}/.syncignore {}:{}/ {}/".format(user_dir, hostname, source_dir, directory)
+command = "rsync -azuzP $delete --exclude-from={}/.syncignore {}:{}/ {}/".format(user_dir, hostname, source_dir, directory)
 print(command)
 EOF
 )
