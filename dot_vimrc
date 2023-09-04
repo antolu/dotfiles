@@ -8,23 +8,23 @@ elseif empty(glob('~/.local/share/nvim/site/autoload/plug.vim')) && has('nvim')
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-source ~/.vim/configs/preamble.vimrc
+source ~/.config/vim/preamble.vimrc
 
 call plug#begin()
 
-source ~/.vim/configs/editor.vimrc
+source ~/.config/vim/editor.vimrc
 
-source ~/.vim/configs/autocomplete.vimrc
+source ~/.config/vim/autocomplete.vimrc
 
-source ~/.vim/configs/latex.vimrc
+source ~/.config/vim/latex.vimrc
 
-source ~/.vim/configs/workspace.vimrc
+source ~/.config/vim/workspace.vimrc
 
-source ~/.vim/configs/interface.vimrc
+source ~/.config/vim/interface.vimrc
 
 if !has('nvim')
     call plug#end()
 endif
 
-source ~/.vim/configs/postamble.vimrc
+source ~/.config/vim/postamble.vimrc
 
