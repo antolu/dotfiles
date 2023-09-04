@@ -20,7 +20,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
     Plug 'folke/noice.nvim'
     Plug 'MunifTanjim/nui.nvim'
     Plug 'rcarriga/nvim-notify'
-
+    Plug 'christoomey/vim-tmux-navigator'
 " }}}
 
 " nvim tree

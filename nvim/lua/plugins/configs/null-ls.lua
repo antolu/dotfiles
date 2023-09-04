@@ -13,7 +13,7 @@ function M.setup()
 		sources = {
 			code_actions.refactoring,
 			diagnostics.codespell,
-			diagnostics.flake8,
+			-- diagnostics.flake8,
 			diagnostics.mypy,
 			--completion.tags,
 			formatting.black,
