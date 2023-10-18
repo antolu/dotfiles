@@ -106,6 +106,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
     
     Plug 'zbirenbaum/copilot.lua'
     Plug 'zbirenbaum/copilot-cmp'
+    Plug 'Exafunction/codeium.nvim'
     Plug 'weilbith/nvim-code-action-menu'
 
     Plug 'kosayoda/nvim-lightbulb'
@@ -151,6 +152,7 @@ lua require('which-key').setup({disable = {buftypes = {'cmdline'}}})
 
 lua require('plugins.configs.aerial').setup()
 lua require('plugins.configs.alpha').setup()
+lua require('plugins.configs.codeium').setup()
 lua require('plugins.configs.copilot').setup()
 lua require('plugins.configs.diagnostic').setup()
 lua require('plugins.configs.gitsigns').setup()

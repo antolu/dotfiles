@@ -102,15 +102,6 @@ function M.setup()
         ensure_installed = { "pyright", "vimls", "yamlls", "taplo", "jsonls", "lua_ls" }
     })
 
-    mason_lsp.setup_handlers({
-        function(server_name) -- default handler (optional)
-            require("lspconfig")[server_name].setup({
-                capabilities = M.capabilities,
-                on_attach = M.on_attach,
-            })
-        end,
-    })
-
     nvim_lsp.pyright.setup({
         capabilities = M.capabilities,
         on_attach = M.on_attach,
@@ -127,6 +118,15 @@ function M.setup()
     nvim_lsp.gopls.setup({
         capabilities = M.capabilities,
         on_attach = M.on_attach,
+    })
+
+    mason_lsp.setup_handlers({
+        function(server_name) -- default handler (optional)
+            require("lspconfig")[server_name].setup({
+                capabilities = M.capabilities,
+                on_attach = M.on_attach,
+            })
+        end,
     })
 end
 
