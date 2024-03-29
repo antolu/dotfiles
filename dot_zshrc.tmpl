@@ -23,8 +23,10 @@ fi
 #
 # ============================================================================
 
-export EDITOR=/usr/bin/nvim
-export VISUAL=/usr/bin/nvim
+export KRB5CCNAME=FILE:/tmp/krb5cc_`id -u`
+
+export EDITOR=nvim
+export VISUAL=nvim
 export PATH=$PATH:/opt/cuda/bin:/usr/local/texlive/2022/bin/x86_64-linux
 
 # ============================================================================
