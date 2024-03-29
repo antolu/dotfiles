@@ -17,8 +17,8 @@ fi
 # Editors
 #
 
-export EDITOR='nano'
-export VISUAL='nano'
+export EDITOR='nvim'
+export VISUAL='nvim'
 export PAGER='less'
 
 #
@@ -42,11 +42,10 @@ typeset -gU cdpath fpath mailpath path
 # )
 
 # Set the list of directories that Zsh searches for programs.
-path=(
-  /opt/homebrew/bin
+path=({{ if eq .chezmoi.os "darwin" }}
+  /opt/homebrew/bin{{ end }}
   /usr/local/{bin,sbin}
-  /home/anton/.local/bin
-  /Users/antonlu/.local/bin
+  {{ .chezmoi.homeDir }}/.local/bin
   $path
 )
 
