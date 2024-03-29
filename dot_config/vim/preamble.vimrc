@@ -1,4 +1,5 @@
 " Pick a leader key
+map <Space> <Nop>
 let mapleader =" " 
 let maplocalleader =" "
 

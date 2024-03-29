@@ -107,6 +107,10 @@ function M.setup()
         on_attach = M.on_attach,
         settings = {
             pyright = {
+                analysis = {
+                    autoSearchPaths = true,
+                    typeCheckingMode = "off",
+                },
                 plugins = {},
             },
         },

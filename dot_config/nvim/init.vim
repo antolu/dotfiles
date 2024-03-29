@@ -2,16 +2,22 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/.vimrc
 
+if ! exists('g:vscode')
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && v:this_session == "" | Alpha | endif
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | wincmd p | ene | exe 'cd '.argv()[0] | Alpha | endif
+endif
 
 " {{{
+    if ! exists('g:vscode')
     Plug 'goolord/alpha-nvim'
-    Plug 'edluffy/specs.nvim'
     Plug 'petertriho/nvim-scrollbar'
     Plug 'kevinhwang91/nvim-hlslens'
-    Plug 'yorickpeterse/nvim-window'
+    endif
 
+    Plug 'yorickpeterse/nvim-window'
+    Plug 'edluffy/specs.nvim'
+
+    if ! exists('g:vscode')
     Plug 'rmagatti/auto-session'
     Plug 'rmagatti/session-lens'
 
@@ -49,7 +55,6 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 " {{{
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
-    Plug 'folke/which-key.nvim'
 " }}}
 
 " treesitter
@@ -69,17 +74,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 " {{{
     Plug 'lewis6991/gitsigns.nvim'
 " }}}
-
-" leap.nvim
-" {{{
-    Plug 'ggandor/leap.nvim'
-" }}}
-
-" hop.nvim
-" {{{
-    Plug 'phaazon/hop.nvim'
-" }}}
-
+"
 " LSP
 " {{{
     Plug 'williamboman/mason.nvim'
@@ -106,22 +101,36 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
     
     Plug 'zbirenbaum/copilot.lua'
     Plug 'zbirenbaum/copilot-cmp'
-    Plug 'Exafunction/codeium.nvim'
+"    Plug 'Exafunction/codeium.nvim'
     Plug 'weilbith/nvim-code-action-menu'
 
     Plug 'kosayoda/nvim-lightbulb'
     Plug 'antoinemadec/FixCursorHold.nvim'
 " }}}
-
-" theme
+"
+"" theme
 " {{{
     Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
     Plug 'sonph/onehalf', {'rtp': 'vim/'}
     Plug 'navarasu/onedark.nvim'
 " }}}
 
+    endif
+
+    Plug 'folke/which-key.nvim'
+
+" leap.nvim
+" {{{
+    Plug 'ggandor/leap.nvim'
+" }}}
+
+" hop.nvim
+" {{{
+    Plug 'phaazon/hop.nvim'
+" }}}
 call plug#end()
 
+if ! exists('g:vscode')
 " Theme
 " {{{
     " "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
@@ -141,38 +150,42 @@ call plug#end()
     endif
 " }}}
 colorscheme onedark
+endif
 
 " lua require("vim.lsp.log").set_format_func(vim.inspect)
 
 lua require('leap').add_default_mappings()
-lua require('mason').setup()
-lua require('mason-lspconfig').setup({automatic_installation = true,})
-lua require('nvim-lightbulb').setup({autocmd = {enable = true}})
 lua require('which-key').setup({disable = {buftypes = {'cmdline'}}})
-
-lua require('plugins.configs.aerial').setup()
-lua require('plugins.configs.alpha').setup()
-lua require('plugins.configs.codeium').setup()
-lua require('plugins.configs.copilot').setup()
-lua require('plugins.configs.diagnostic').setup()
-lua require('plugins.configs.gitsigns').setup()
 lua require('plugins.configs.hop').setup()
-lua require('plugins.configs.lsp-format').setup()
-lua require('plugins.configs.lsp').setup()
-lua require('plugins.configs.lualine').setup()
-lua require('plugins.configs.luasnip').setup()
-lua require('plugins.configs.noice').setup()
-lua require('plugins.configs.null-ls').setup()
-lua require('plugins.configs.nvim-autopairs').setup()
-lua require('plugins.configs.nvim-cmp').setup()
-lua require('plugins.configs.neo-tree').setup()
-lua require('plugins.configs.nvim-treesitter-textobjects').setup()
-lua require('plugins.configs.nvim-treesitter').setup()
 lua require('plugins.configs.nvim-window').setup()
-lua require('plugins.configs.refactoring').setup()
-lua require('plugins.configs.scrollbar').setup()
-lua require('plugins.configs.session').setup()
 lua require('plugins.configs.specs').setup()
-lua require('plugins.configs.syntax-tree-surfer').setup()
-lua require('plugins.configs.telescope').setup()
-lua require('plugins.configs.trouble').setup()
+
+if ! exists('g:vscode')
+    lua require('mason').setup()
+    lua require('mason-lspconfig').setup({automatic_installation = true,})
+    lua require('nvim-lightbulb').setup({autocmd = {enable = true}})
+
+    lua require('plugins.configs.aerial').setup()
+    lua require('plugins.configs.alpha').setup()
+    "lua require('plugins.configs.codeium').setup()
+    lua require('plugins.configs.copilot').setup()
+    lua require('plugins.configs.diagnostic').setup()
+    lua require('plugins.configs.gitsigns').setup()
+    lua require('plugins.configs.lsp-format').setup()
+    lua require('plugins.configs.lsp').setup()
+    lua require('plugins.configs.lualine').setup()
+    lua require('plugins.configs.luasnip').setup()
+    lua require('plugins.configs.noice').setup()
+    lua require('plugins.configs.null-ls').setup()
+    lua require('plugins.configs.nvim-autopairs').setup()
+    lua require('plugins.configs.nvim-cmp').setup()
+    lua require('plugins.configs.neo-tree').setup()
+    lua require('plugins.configs.nvim-treesitter-textobjects').setup()
+    lua require('plugins.configs.nvim-treesitter').setup()
+    lua require('plugins.configs.refactoring').setup()
+    lua require('plugins.configs.scrollbar').setup()
+    lua require('plugins.configs.session').setup()
+    lua require('plugins.configs.syntax-tree-surfer').setup()
+    lua require('plugins.configs.telescope').setup()
+    lua require('plugins.configs.trouble').setup()
+endif

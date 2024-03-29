@@ -54,8 +54,8 @@ function M.setup()
 			end),
 		}),
 		sources = cmp.config.sources({
-			-- { name = "copilot", group_index = 2 },
-			{ name = "codeium", group_index = 2 },
+			{ name = "copilot", group_index = 2 },
+			-- { name = "codeium", group_index = 2 },
 			{
 				name = "nvim_lsp",
 			},
@@ -71,8 +71,8 @@ function M.setup()
 		formatting = {
 			format = lspkind.cmp_format({
 				menu = {
-					-- copilot = '[Copilot]',
-					codeium = "[Codeium]",
+					copilot = '[Copilot]',
+					-- codeium = "[Codeium]",
 					buffer = "[Buffer]",
 					luasnip = "[LuaSnip]",
 					nvim_lsp = "[LSP]",
