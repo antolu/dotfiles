@@ -2,19 +2,25 @@
 
 Set of configuration files for Linux
 
+## Package prerequisites
+
+### Required
+* zsh - shell
+* vim - text editor
+
+### Optional
+* neovim - text editor
+* tmux - terminal multiplexer
+* chezmoi - dotfile manager
+
 ## How to set up
 ```shell
-git clone https://gitlab.com/antonlu/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
-zsh  # enter zsh
-source setup.sh
-installZsh
-installFzfModule
-linkConfigs  # note this will overwrite your current .zshrc, .zprofile, .vimrc etc.
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply antolu
 chsh -s /bin/zsh  # set default shell to zsh
+zsh  # enter zsh
 ```
 
-Other useful functions are
+### Other useful functions are
 
 ```
 generateSSHKeychain  # generates an ed25519 keychain with your username and hostname as comment
