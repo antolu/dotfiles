@@ -2,7 +2,12 @@
 type = "git-repo"
 url = "https://github.com/sorin-ionescu/prezto.git"
 refreshPeriod = "168h"
-args = ["--init", "--recursive"]
+
+[".zprezto".pull]
+args = ["--recursive"]
+
+[".zprezto".clone]
+args = ["--recursive"]
 
 [".zprezto/contrib/fzf"]
 type = "git-repo"
