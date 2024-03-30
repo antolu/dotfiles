@@ -1,4 +1,4 @@
 #!/bin/bash
-status = `onsubnet --not 194.12.`
+status=`onsubnet --not 194.12.`
 exit $status
 

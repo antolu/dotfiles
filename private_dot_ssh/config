@@ -97,7 +97,7 @@ Match exec notatcern host ml3
     GSSAPIAuthentication yes
     GSSAPIDelegateCredentials yes
 
-Match exec host ml3
+Host ml3
     User lua
     HostName cs-513-ml003
     ForwardAgent yes
@@ -109,7 +109,7 @@ Match exec atcern host olympus
     User anton
     HostName olympus
 
-Match notatcern host olympus
+Match exec notatcern host olympus
     User anton
     ProxyJump lxtunnel
 
