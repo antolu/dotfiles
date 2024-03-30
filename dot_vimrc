@@ -8,9 +8,11 @@ elseif empty(glob('~/.local/share/nvim/site/autoload/plug.vim')) && has('nvim')
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-source ~/.config/vim/preamble.vimrc
-
 call plug#begin()
+
+Plug 'alker0/chezmoi.vim'
+
+source ~/.config/vim/preamble.vimrc
 
 source ~/.config/vim/editor.vimrc
 

@@ -59,6 +59,10 @@ alias jump-ml002="ssh -XY -tt ml2 'zsh -l'"
 alias jump-rhel="ssh -XY -tt vm-el9 'zsh -l'"
 alias cernvmproxy='ssh -L 5901:localhost:5901 vm-cc7'
 alias cernproxy='ssh -N -D 9090 lxplus'
+alias pypi-pip-install='pip install --index-url https://pypi.org/simple/ --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host=files.pythonhosted.org'
+alias pypi-pip-upgrade='pip install --upgrade --index-url https://pypi.org/simple/ --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host=files.pythonhosted.org'
+alias accpy-pip-install='pip install --index-url https://acc-py.web.cern.ch/simple/ --trusted-host acc-py.web.cern.ch'
+alias accpy-pip-upgrade='pip install --upgrade --index-url https://acc-py.web.cern.ch/simple/ --trusted-host acc-py.web.cern.ch'
 
 # random convenience
 alias please='sudo'
