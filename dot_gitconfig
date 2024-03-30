@@ -8,7 +8,7 @@
 	email = anton96lu@gmail.com
 	name = Anton Lu
 [includeIf "gitdir:~/code/cern/"]
-    path = ~/.gitconfig-cern
+path = ~/.gitconfig-cern
 [core]
 	autocrlf = input
 	editor = vim
@@ -18,11 +18,11 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 [alias]
-    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-    lol = log --graph --decorate --pretty=oneline --abbrev-commit
-    change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
+lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+lol = log --graph --decorate --pretty=oneline --abbrev-commit
+change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
 [color]
-        branch = auto
-        diff = auto
-        interactive = auto
-        status = auto
+branch = auto
+diff = auto
+interactive = auto
+status = auto
