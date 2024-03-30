@@ -4,7 +4,7 @@ url = "https://github.com/sorin-ionescu/prezto.git"
 refreshPeriod = "168h"
 
 [".zprezto".pull]
-args = ["--recursive"]
+args = ["--recurse-submodules"]
 
 [".zprezto".clone]
 args = ["--recursive"]
