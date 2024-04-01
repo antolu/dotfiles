@@ -1,17 +1,15 @@
 [url "https://aur.archlinux.org/"]
 	insteadOf = aur:
-[url "https://github.com/"]
-	insteadOf = "gh:"
-[url "git@github.com:"]
-	pushInsteadOf = "gh:"
 [user]
-	email = anton96lu@gmail.com
-	name = Anton Lu
+	email = {{- .chezmoi.email }}
+	name = {{- .chezmoi.fullname }}
+{{- if eq .chezmoi.fullname "Anton Lu" }}
 [includeIf "gitdir:~/code/cern/"]
 path = ~/.gitconfig-cern
+{{ end -}}
 [core]
 	autocrlf = input
-	editor = vim
+	editor = nvim
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true

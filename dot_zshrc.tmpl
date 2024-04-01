@@ -101,7 +101,7 @@ forwardport() {
   # check if port is int
   # check arguments
   echo "=> Forwarding port $port from $hostname to localhost"
-  ssh  -L "$port:localhost:$port" $hostname
+  ssh -L "$port":localhost:"$port" $hostname
 }
 
 VENVDIR=~/.venvs
