@@ -1,9 +1,9 @@
 [url "https://aur.archlinux.org/"]
 	insteadOf = aur:
 [user]
-	email = {{- .chezmoi.email }}
-	name = {{- .chezmoi.fullname }}
-{{- if eq .chezmoi.fullname "Anton Lu" }}
+	email = {{- .email }}
+	name = {{- .fullname }}
+{{- if eq .fullname "Anton Lu" }}
 [includeIf "gitdir:~/code/cern/"]
 path = ~/.gitconfig-cern
 {{ end -}}
