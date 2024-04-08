@@ -3,6 +3,7 @@ Host *
   AddKeysToAgent yes
   IdentityFile ~/.ssh/id_ed25519
 
+{{- if eq .fullname "Anton Lu" }}
 Host arcadia
   User anton
   Hostname arcadia
@@ -14,6 +15,7 @@ Host atlantis
 Host home
   User anton
   Hostname home.haochen.lu
+{{ end -}}
 
 # CERN devices
 Host lxtunnel
@@ -104,7 +106,7 @@ Host ml3
     GSSAPIAuthentication yes
     GSSAPIDelegateCredentials yes
 
-
+{{- if eq .fullname "Anton Lu" }}
 Match exec atcern host olympus
     User anton
     HostName olympus
@@ -125,3 +127,4 @@ Host pcbe17355
     User anton
     GSSAPIAuthentication no
     GSSAPIDelegateCredentials no
+{{ end -}}

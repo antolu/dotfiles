@@ -1,12 +1,14 @@
+{{ if (and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease "arch")) }}
 [url "https://aur.archlinux.org/"]
 	insteadOf = aur:
+{{ end -}}
 [user]
 	email = {{ .email }}
 	name = {{ .fullname }}
-{{ if eq .fullname "Anton Lu" }}
+{{- if eq .fullname "Anton Lu" }}
 [includeIf "gitdir:~/code/cern/"]
 path = ~/.gitconfig-cern
-{{ end }}
+{{ end -}}
 [core]
 	autocrlf = input
 	editor = nvim
