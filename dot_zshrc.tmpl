@@ -27,7 +27,7 @@ export KRB5CCNAME=FILE:/tmp/krb5cc_`id -u`
 
 export EDITOR=nvim
 export VISUAL=nvim
-export PATH=$PATH:/opt/cuda/bin:/usr/local/texlive/2022/bin/x86_64-linux
+export PATH=$PATH:/opt/cuda/bin:/usr/local/texlive/2024/bin/x86_64-linux
 
 # ============================================================================
 # 
@@ -35,12 +35,12 @@ export PATH=$PATH:/opt/cuda/bin:/usr/local/texlive/2022/bin/x86_64-linux
 #
 # ============================================================================
 
-{{ if eq .chezmoi.os "darwin" }}
+{{- if eq .chezmoi.os "darwin" }}
 # macos
 alias ibrew="arch -x86_64 /usr/local/bin/brew"
-{{ end }}
+{{ end -}}
 
-{{ if eq .chezmoi.os "linux" }}
+{{- if eq .chezmoi.os "linux" }}
 alias srestart='sudo systemctl restart'
 alias sstatus='sudo systemctl status'
 alias sstart='sudo systemctl start'
@@ -50,7 +50,7 @@ alias sstop='sudo systemctl stop'
 alias pac='sudo pacman -Sy'
 alias wifi="nmcli d wifi"
 alias windows='sudo nextboot Microsoft && sudo reboot'
-{{ end }}
+{{ end -}}
 
 # cern
 alias source-accpy='source /acc/local/share/python/acc-py/pro/setup.sh'
@@ -73,6 +73,7 @@ alias pull="git pull"
 alias push="git push"
 alias delete="rm -rf"
 alias svim='sudo vim'
+alias chedit="chezmoi edit --apply"
 
 # ============================================================================
 # 
@@ -94,7 +95,7 @@ generateSSHKeychain() {
 	fi
 }
 
-forwardport() {
+linkport() {
   port="$1"
   hostname="$2"
   
