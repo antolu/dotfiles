@@ -13,6 +13,11 @@ Set of configuration files for Linux
 * tmux - terminal multiplexer
 * chezmoi - dotfile manager
 
+### Dependencies
+
+For neovim to function correctly, you need to install `npm`.
+Additional tools that are recommended include `rsync`.
+
 ## How to set up
 ```shell
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply antolu
