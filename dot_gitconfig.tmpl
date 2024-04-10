@@ -1,4 +1,4 @@
-{{ if (and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease "arch")) }}
+{{ if (and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "arch")) }}
 [url "https://aur.archlinux.org/"]
 	insteadOf = aur:
 {{ end -}}

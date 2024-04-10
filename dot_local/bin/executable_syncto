@@ -1,0 +1,110 @@
+from __future__ import annotations
+
+import argparse
+import os
+import os.path
+import subprocess
+import sys
+
+DESCRIPTION = """
+Sync files to a remote host using rsync, by defalt syncs the current directory to the same path relative to ~ on the remote host.
+
+The destination can be in the form of hostname, user@hostname or hostname:directory. If the destination directory is not specified it will default to the same path relative to ~ on the remote host as the source directory.
+
+Files or directories to exclude can be specified in a .syncignore file in the source directory or in ~/.syncignore.
+
+Example calls:
+    syncto cs-513-ml001
+    syncto lua@cs-513-ml001
+    syncto cs-513-ml001:code/hysteresis-compensation
+    syncto cs-513-ml001 a_repository --delete
+"""
+
+
+def parse_args(argv: list[str]) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description=DESCRIPTION,
+        usage="%(prog)s destination [directory] [options]",
+    )
+    parser.add_argument(
+        "destination",
+        type=str,
+        help="The destination to sync to. "
+        "Can be in the form of hostname, user@hostname or "
+        "hostname:directory, if destination directory is "
+        "not specified it will default to the same path "
+        "relative to ~ on the remote host as the source directory.",
+    )
+
+    parser.add_argument(
+        "directory",
+        required=False,
+        type=str,
+        default="",
+        help="The source directory to sync, defaults to the current directory.",
+    )
+    parser.add_argument("--dry-run", action="store_true", help="Perform a dry run.")
+    parser.add_argument(
+        "-d",
+        "--delete",
+        action="store_true",
+        help="Delete extraneous files from destination dirs.",
+    )
+
+    return parser.parse_args(argv)
+
+
+def main(argv: list[str]) -> None:
+    args = parse_args(argv)
+
+    hostname = args.destination
+    if ":" in hostname:
+        try:
+            hostname, dest_dir = hostname.split(":")
+        except ValueError:
+            print("Invalid destination: {}".format(args.destination))
+            sys.exit(1)
+    else:
+        dest_dir = ""
+
+    if args.directory == "":
+        directory = os.getcwd()
+    else:
+        directory = args.directory
+
+    if dest_dir == "":  # auto-detect dest_dir
+        user_dir = os.path.expanduser("~")
+        if directory.startswith(user_dir):
+            dest_dir = directory[len(user_dir) + 1 :]  # +1 for the slash
+        else:
+            dest_dir = directory
+
+    command = ["rsync", "-azuzP"]
+
+    if args.delete:
+        command.append("--delete")
+
+    if args.dry_run:
+        command.append("--dry-run")
+
+    if os.path.exists(".syncignore"):
+        command.append("--exclude-from=.syncignore")
+    elif os.path.exists("~/.syncignore"):
+        command.append("--exclude-from=~/.syncignore")
+
+    command.append(f"{directory}/")
+    command.append(f"{hostname}:{dest_dir}/")
+
+    try:
+        return_code = subprocess.call(command)
+    except KeyboardInterrupt:
+        return_code = 1
+    except Exception as e:  # noqa: F722
+        print(f"Error: {e}")
+        return_code = 1
+
+    sys.exit(return_code)
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
