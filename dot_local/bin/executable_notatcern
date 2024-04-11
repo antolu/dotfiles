@@ -1,4 +1,5 @@
 #!/bin/bash
 status=`onsubnet --not 194.12.`
-exit $status
+status2=`onsubnet --not 128.141.`
+exit $status && $status2
 

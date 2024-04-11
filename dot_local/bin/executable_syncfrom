@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from __future__ import annotations
 
 import argparse
@@ -25,7 +26,7 @@ Example calls:
 def parse_args(argv: list[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=DESCRIPTION,
-        usage="%(prog)s remote [directory] [options]",
+        usage="%(prog)s <remote> [directory] [options]",
     )
     parser.add_argument(
         "remote",
@@ -39,8 +40,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
 
     parser.add_argument(
         "directory",
-        required=False,
-        type=str,
+        nargs="?",
         default="",
         help="The local directory to sync to, defaults to the current directory.",
     )
@@ -58,7 +58,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
 def main(argv: list[str]) -> None:
     args = parse_args(argv)
 
-    hostname = args.destination
+    hostname = args.remote
     if ":" in hostname:
         try:
             hostname, dest_dir = hostname.split(":")

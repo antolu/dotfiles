@@ -1,3 +1,4 @@
 #!/bin/bash
 status=`onsubnet 194.12.`
-exit $status
+status2=`onsubnet 128.141`
+exit $status || exit $status2
