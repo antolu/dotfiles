@@ -4,7 +4,7 @@ url = "https://github.com/sorin-ionescu/prezto.git"
 refreshPeriod = "168h"
 
 [".zprezto".pull]
-args = ["--recurse-submodules", "--rebase"]
+args = ["--recurse-submodules", "--ff"]
 
 [".zprezto".clone]
 args = ["--recursive"]
@@ -17,3 +17,4 @@ url = "https://github.com/gpanders/fzf-prezto.git"
 type = "git-repo"
 url = "https://github.com/tmux-plugins/tpm"
 refreshPeriod = "168h"
+
