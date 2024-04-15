@@ -90,8 +90,8 @@ def main(argv: list[str]) -> None:
 
     if os.path.exists(".syncignore"):
         command.append("--exclude-from=.syncignore")
-    elif os.path.exists("~/.syncignore"):
-        command.append("--exclude-from=~/.syncignore")
+    elif os.path.exists(os.path.expanduser("~/.syncignore")):
+        command.append(f"--exclude-from={os.path.expanduser('~/.syncignore')}")
 
     command.append(f"{hostname}:{dest_dir}/")
     command.append(f"{directory}/")
