@@ -1,6 +1,8 @@
 {{- $fullname := promptStringOnce . "fullname" "Your name" -}}
 {{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $wakatime_api_key := promptStringOnce . "wakatime_api_key" "Wakatime API Key" -}}
 
 [data]
     fullname = {{ $fullname | quote }}
     email = {{ $email | quote }}
+    wakatime_api_key = {{ $wakatime_api_key | quote }}

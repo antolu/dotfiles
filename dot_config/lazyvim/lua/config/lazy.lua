@@ -13,6 +13,15 @@ require("lazy").setup({
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     { import = "plugins" },
+    {
+      "alker0/chezmoi.vim",
+      lazy = false,
+      init = function()
+        -- This option is required.
+        vim.g["chezmoi#use_tmp_buffer"] = true
+        -- add other options here if needed.
+      end,
+    },
     -- { import = "lazyvim.plugins.extras.coding.copilot" },
     -- { import = "lazyvim.plugins.extras.coding.native_snippets" },
     -- { import = "lazyvim.plugins.extras.dap.core" },
