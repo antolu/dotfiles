@@ -151,4 +151,17 @@ Match exec notatcern host pcbe17737
 Host pcbe17737
   Hostname pcbe17737
   User lua
+
+Match exec notatcern host pcbe17291
+    HostName pcbe17291
+    User anton
+    ProxyJump lxtunnel
+    GSSAPIAuthentication no
+    GSSAPIDelegateCredentials no
+
+Host pcbe17291
+    HostName pcbe17291
+    User anton
+    GSSAPIAuthentication no
+    GSSAPIDelegateCredentials no
 {{ end -}}
