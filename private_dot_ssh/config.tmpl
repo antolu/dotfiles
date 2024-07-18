@@ -36,6 +36,19 @@ Match exec notatcern host lxplus
     GSSAPIAuthentication yes
     GSSAPIDelegateCredentials yes
 
+Host lxplus-gpu
+    User lua
+    Hostname lxplus-gpu.cern.ch
+    GSSAPIAuthentication yes
+    GSSAPIDelegateCredentials yes
+
+Match exec atcern host lxplus-gpu
+    User lua
+    Hostname lxplus-gpu
+    GSSAPIAuthentication yes
+    GSSAPIDelegateCredentials yes
+
+
 Match exec notatcern host vm-cc7
     User lua
     HostName cwe-513-vpl657
@@ -143,6 +156,30 @@ Match exec notatcern host pcbe17355
 
 Host pcbe17355
     HostName pcbe17355
+    User anton
+    GSSAPIAuthentication no
+    GSSAPIDelegateCredentials no
+
+Match exec notatcern host pcbe17737
+    HostName pcbe17737
+    User lua
+    ProxyJump lxtunnel
+    GSSAPIAuthentication yes
+    GSSAPIDelegateCredentials yes
+
+Host pcbe17737
+  Hostname pcbe17737
+  User lua
+
+Match exec notatcern host pcbe17291
+    HostName pcbe17291
+    User anton
+    ProxyJump lxtunnel
+    GSSAPIAuthentication no
+    GSSAPIDelegateCredentials no
+
+Host pcbe17291
+    HostName pcbe17291
     User anton
     GSSAPIAuthentication no
     GSSAPIDelegateCredentials no
