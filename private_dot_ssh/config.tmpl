@@ -119,13 +119,19 @@ Host ml3
     GSSAPIAuthentication yes
     GSSAPIDelegateCredentials yes
 
+Match exec notatcern host ml4
+  User lua
+  HostName cs-ccr-ml004
+  ProxyJump lxtunnel
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
+
 Host ml4
-    User lua
-    HostName cs-ccr-ml004
-    ForwardAgent yes
-    GSSAPIAuthentication yes
-    GSSAPIDelegateCredentials yes
-    ProxyJump  ml1
+  User lua
+  HostName cs-ccr-ml004
+  ForwardAgent yes
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
 
 {{- if eq .fullname "Anton Lu" }}
 Match exec atcern host olympus
@@ -170,6 +176,7 @@ Match exec notatcern host pcbe17737
 Host pcbe17737
   Hostname pcbe17737
   User lua
+  IdentityFile ~/.ssh/id_ed25519
 
 Match exec notatcern host pcbe17291
     HostName pcbe17291
