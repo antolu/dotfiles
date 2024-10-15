@@ -122,13 +122,14 @@ Host ml3
 Match exec notatcern host ml4
   User lua
   HostName cs-ccr-ml004
-  ProxyJump lxtunnel
+  ProxyJump ml1
   GSSAPIAuthentication yes
   GSSAPIDelegateCredentials yes
 
 Host ml4
   User lua
   HostName cs-ccr-ml004
+  ProxyJump ml1
   ForwardAgent yes
   GSSAPIAuthentication yes
   GSSAPIDelegateCredentials yes
