@@ -53,6 +53,14 @@ alias wifi="nmcli d wifi"
 alias windows='sudo nextboot Microsoft && sudo reboot'
 {{ end -}}
 
+pip() {
+    if command -v uv >/dev/null 2>&1; then  
+        uv pip "$@"  
+    else  
+        command pip "$@"  
+    fi 
+}
+
 # cern
 alias source-accpy='source /acc/local/share/python/acc-py/pro/setup.sh'
 alias ml1="ssh -XY  -tt ml1 'zsh -l'"
@@ -74,7 +82,7 @@ alias pypi-install-e="pypi-install -e --config-settings editable_mode=compat"
 alias accpy-install-e="accpy-install -e --config-settings editable_mode=compat"
 
 alias install-acc-py-hooks="pip install git+https://gitlab.cern.ch/acc-co/devops/python/acc-py-pip-config.git"
-
+alias pipgrep="pip list | grep"
 
 # random convenience
 alias please='sudo'
