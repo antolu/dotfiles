@@ -53,12 +53,12 @@ alias wifi="nmcli d wifi"
 alias windows='sudo nextboot Microsoft && sudo reboot'
 {{ end -}}
 
-pip() {
-    if command -v uv >/dev/null 2>&1; then  
-        uv pip "$@"  
-    else  
-        command pip "$@"  
-    fi 
+function pip() {
+    if command -v uv &> /dev/null; then
+        uv pip "$@"
+    else
+        python -m pip "$@"
+    fi
 }
 
 # cern
