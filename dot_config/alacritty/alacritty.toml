@@ -1,3 +1,4 @@
+[general]
 import = ["/home/anton/.config/alacritty/one_dark.toml"]
 
 [font]
