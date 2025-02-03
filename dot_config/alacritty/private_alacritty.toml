@@ -1,0 +1,6 @@
+
+[font]
+size = 10.0
+
+[general]
+import = ["/home/anton/.config/alacritty/one_dark.toml"]

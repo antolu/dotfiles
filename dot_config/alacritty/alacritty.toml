@@ -1,5 +1,0 @@
-[general]
-import = ["/home/anton/.config/alacritty/one_dark.toml"]
-
-[font]
-size = 10.0
