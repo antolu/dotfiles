@@ -1,0 +1,24 @@
+## Code Best Practices
+
+- Always type hint python code
+- Always use `from __future__ import annotations`
+- Use class literals as types
+- Use `|` for union types
+- If pre-commit hooks are configured, ensure pre-commit passes before finalizing commits
+- When committing code and pytests are available, ensure all tests pass before commits are finalized
+- Large commits can be divided into smaller subcommits
+- Keep commit messages simple, only mentioning things that are new, have changed, or have been removed
+- In python code, prefer `import xxx.yyy` and use as `xxx.yyy.Zzz`, rather than `from xxx.yyy import Zzz` when using third-party libraries. Intra-package, `from xxx.yyy import Zzz` is preferred. Never use wildcard imports
+- Avoid using the term "key points" or "key anything" in documentation or comments
+- When making newlines in the code, you should not add whitespace in the empty lines
+- All imports should always be at the top of the file, unless there is an explicit reason
+- When running ruff check for linting, always run as `ruff check --fix --unsafe-fixes --preview`
+- Never use formal tone in coding, comments, documentation, READMEs, etc, unless explicitly asked for. Words like comprehensive, enhanced, etc are not allowed
+- Always ensure pre-commit passes before attempting git commit
+- When adding a new feature to the code, do not plan for backwards compatibility unless explicitly asked for
+- Do not under any circumstance make code that is xxx_new, xxx_unified, xxx_refactor or xxx_jax. Just write xxx and replace the old code
+- Do not add unnecessary print statements in the code unless asked for, especially in notebooks
+- Do not add code comments when the code is already readable
+- Avoid phrases like "comprehensive", "key features", or similar cliché language in documentation, comments, and communications about code
+- In python projects, never make class based tests (class TestSomething), but prefer functional tests (def test_something), unless class-based provides an advantage for the specific tests
+- Avoid attempting to git commit or asking for permission to git commit before pre-commits pass. Prefer to git add individual files or patches, or even `git add -u` over `git add .` to avoid committing files that are not meant to be staged
