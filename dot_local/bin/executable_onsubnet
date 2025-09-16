@@ -17,12 +17,17 @@ if [[ "$1" == "--not" ]] ; then
   off=0
 fi
 
-regexp="^$(sed 's/\./\\./g' <<<"$1")"
+if [[ -z "$1" ]] ; then
+  echo "Error: No IP pattern provided after --not flag" >&2
+  exit 1
+fi
+
+regexp="^$(printf '%s' "$1" | sed 's/[.[\*^$()+?{|]/\\&/g')"
 
 if [[ "$(uname)" == "Darwin" ]] ; then
-  ifconfig | grep -F 'inet ' | grep -Fv 127.0.0. | cut -d ' ' -f 2 | grep -Eq "$regexp"
+  ifconfig | grep 'inet ' | grep -v 127.0.0. | cut -d ' ' -f 2 | grep -Eq "$regexp"
 else
-  hostname -i | tr -s " " "\012" | grep -Fv 127.0.0. | grep -Eq "$regexp"
+  hostname -i | tr -s " " "\012" | grep -v 127.0.0. | grep -Eq "$regexp"
 fi
 
 if [[ $? == 0 ]]; then 
