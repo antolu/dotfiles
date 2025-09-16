@@ -1,4 +1,2 @@
 #!/bin/bash
-status=`onsubnet 194.12.`
-status2=`onsubnet 128.141`
-exit $status || exit $status2
+onsubnet 194.12. || onsubnet 128.141

@@ -344,7 +344,13 @@ mkv2mp4() {
 }
 
 clip() {
+{{- if eq .chezmoi.os "darwin" }}
+    pbcopy < "$1"
+{{- else if eq .chezmoi.os "linux" }}
     xclip -selection C "$1"
+{{- else }}
+    echo "clip is not supported on this OS"
+{{- end }}
 }
 
 sedrename() {
