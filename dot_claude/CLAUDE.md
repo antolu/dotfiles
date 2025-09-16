@@ -22,3 +22,4 @@
 - Avoid phrases like "comprehensive", "key features", or similar cliché language in documentation, comments, and communications about code
 - In python projects, never make class based tests (class TestSomething), but prefer functional tests (def test_something), unless class-based provides an advantage for the specific tests
 - Avoid attempting to git commit or asking for permission to git commit before pre-commits pass. Prefer to git add individual files or patches, or even `git add -u` over `git add .` to avoid committing files that are not meant to be staged
+- never commit with --no-verify to skip pre-commit hooks unless requested by the user
