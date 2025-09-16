@@ -3,3 +3,6 @@
 -- Add any additional options here
 vim.g.lazyvim_python_lsp = "basedpyright"
 vim.g.lazyvim_python_ruff = "ruff"
+
+vim.g.vimtex_view_method = "zathura"
+vim.g.vimtex_view_forward_search_on_start = 1
