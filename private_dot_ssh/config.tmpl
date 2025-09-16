@@ -19,105 +19,105 @@ Host home
 
 # CERN devices
 Host lxtunnel
-    User lua
-    Hostname lxtunnel.cern.ch
-    GSSAPIAuthentication yes
-    GSSAPIDelegateCredentials yes
+  User lua
+  Hostname lxtunnel.cern.ch
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
 
 Match exec atcern host lxplus
-    User lua
-    HostName lxplus
-    GSSAPIAuthentication yes
-    GSSAPIDelegateCredentials yes
+  User lua
+  HostName lxplus
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
 
 Match exec notatcern host lxplus
-    User lua
-    Hostname lxplus.cern.ch
-    GSSAPIAuthentication yes
-    GSSAPIDelegateCredentials yes
+  User lua
+  Hostname lxplus.cern.ch
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
 
 Host lxplus-gpu
-    User lua
-    Hostname lxplus-gpu.cern.ch
-    GSSAPIAuthentication yes
-    GSSAPIDelegateCredentials yes
+  User lua
+  Hostname lxplus-gpu.cern.ch
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
 
 Match exec atcern host lxplus-gpu
-    User lua
-    Hostname lxplus-gpu
-    GSSAPIAuthentication yes
-    GSSAPIDelegateCredentials yes
+  User lua
+  Hostname lxplus-gpu
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
 
 
 Match exec notatcern host vm-cc7
-    User lua
-    HostName cwe-513-vpl657
-    ProxyJump lxtunnel
-    GSSAPIAuthentication yes
-    GSSAPIDelegateCredentials yes
+  User lua
+  HostName cwe-513-vpl657
+  ProxyJump lxtunnel
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
 
 Host vm-cc7
-    User lua
-    HostName cwe-513-vpl657
-    ForwardAgent yes
-    GSSAPIAuthentication yes
-    GSSAPIDelegateCredentials yes
+  User lua
+  HostName cwe-513-vpl657
+  ForwardAgent yes
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
 
 Match exec notatcern host vm-el9
-    User lua
-    HostName cwe-513-vpl652
-    ProxyJump lxtunnel
-    GSSAPIAuthentication yes
-    GSSAPIDelegateCredentials yes
+  User lua
+  HostName cwe-513-vpl652
+  ProxyJump lxtunnel
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
 
 Host vm-el9
-    User lua
-    HostName cwe-513-vpl652
-    ForwardAgent yes
-    GSSAPIAuthentication yes
-    GSSAPIDelegateCredentials yes
+  User lua
+  HostName cwe-513-vpl652
+  ForwardAgent yes
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
 
 Match exec notatcern host ml1
-    User lua
-    HostName cs-513-ml001
-    ProxyJump lxtunnel
-    GSSAPIAuthentication yes
-    GSSAPIDelegateCredentials yes
+  User lua
+  HostName cs-513-ml001
+  ProxyJump lxtunnel
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
 
 Host ml1
-    User lua
-    HostName cs-513-ml001
-    ForwardAgent yes
-    GSSAPIAuthentication yes
-    GSSAPIDelegateCredentials yes
+  User lua
+  HostName cs-513-ml001
+  ForwardAgent yes
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
 
 Match exec notatcern host ml2
-    User lua
-    HostName cs-513-ml002
-    ProxyJump lxtunnel
-    GSSAPIAuthentication yes
-    GSSAPIDelegateCredentials yes
+  User lua
+  HostName cs-513-ml002
+  ProxyJump lxtunnel
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
 
 Host ml2
-    User lua
-    HostName cs-513-ml002
-    ForwardAgent yes
-    GSSAPIAuthentication yes
-    GSSAPIDelegateCredentials yes
+  User lua
+  HostName cs-513-ml002
+  ForwardAgent yes
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
 
 Match exec notatcern host ml3
-    User lua
-    HostName cs-513-ml003
-    ProxyJump lxtunnel
-    GSSAPIAuthentication yes
-    GSSAPIDelegateCredentials yes
+  User lua
+  HostName cs-513-ml003
+  ProxyJump lxtunnel
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
 
 Host ml3
-    User lua
-    HostName cs-513-ml003
-    ForwardAgent yes
-    GSSAPIAuthentication yes
-    GSSAPIDelegateCredentials yes
+  User lua
+  HostName cs-513-ml003
+  ForwardAgent yes
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
 
 Match exec notatcern host ml4
   User lua
@@ -136,43 +136,43 @@ Host ml4
 
 {{- if eq .fullname "Anton Lu" }}
 Match exec atcern host olympus
-    User anton
-    HostName olympus
+  User anton
+  HostName olympus
 
 Match exec notatcern host olympus
-    User anton
-    ProxyJump lxtunnel
+  User anton
+  ProxyJump lxtunnel
 
 Match exec notatcern host pcbe17291
-    Hostname pcbe17291
-    User anton
-    ProxyJump lxtunnel
-    IdentityFile ~/.ssh/id_ed25519
+  Hostname pcbe17291
+  User anton
+  ProxyJump lxtunnel
+  IdentityFile ~/.ssh/id_ed25519
 
 Host pcbe17291
-    Hostname pcbe17291
-    User anton
-    IdentityFile ~/.ssh/id_ed25519
+  Hostname pcbe17291
+  User anton
+  IdentityFile ~/.ssh/id_ed25519
 
 Match exec notatcern host pcbe17355
-    HostName pcbe17355
-    User anton
-    ProxyJump lxtunnel
-    GSSAPIAuthentication no
-    GSSAPIDelegateCredentials no
+  HostName pcbe17355
+  User anton
+  ProxyJump lxtunnel
+  GSSAPIAuthentication no
+  GSSAPIDelegateCredentials no
 
 Host pcbe17355
-    HostName pcbe17355
-    User anton
-    GSSAPIAuthentication no
-    GSSAPIDelegateCredentials no
+  HostName pcbe17355
+  User anton
+  GSSAPIAuthentication no
+  GSSAPIDelegateCredentials no
 
 Match exec notatcern host pcbe17737
-    HostName pcbe17737
-    User lua
-    ProxyJump lxtunnel
-    GSSAPIAuthentication yes
-    GSSAPIDelegateCredentials yes
+  HostName pcbe17737
+  User lua
+  ProxyJump lxtunnel
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
 
 Host pcbe17737
   Hostname pcbe17737
@@ -180,15 +180,15 @@ Host pcbe17737
   IdentityFile ~/.ssh/id_ed25519
 
 Match exec notatcern host pcbe17291
-    HostName pcbe17291
-    User anton
-    ProxyJump lxtunnel
-    GSSAPIAuthentication no
-    GSSAPIDelegateCredentials no
+  HostName pcbe17291
+  User anton
+  ProxyJump lxtunnel
+  GSSAPIAuthentication no
+  GSSAPIDelegateCredentials no
 
 Host pcbe17291
-    HostName pcbe17291
-    User anton
-    GSSAPIAuthentication no
-    GSSAPIDelegateCredentials no
+  HostName pcbe17291
+  User anton
+  GSSAPIAuthentication no
+  GSSAPIDelegateCredentials no
 {{ end -}}
