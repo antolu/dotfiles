@@ -37,6 +37,8 @@ export VISUAL=nvim
 {{- if eq .chezmoi.os "darwin" }}
 # macos
 alias ibrew="arch -x86_64 /usr/local/bin/brew"
+alias pete='source ~/.conda/etc/profile.d/conda.sh && conda activate mcp && ollmcp --config
+  /Users/antonlu/code/mcp-config/ollmcp-config.json --model qwen3:14b'
 {{ end }}
 
 {{- if eq .chezmoi.os "linux" }}
@@ -98,6 +100,16 @@ alias chedit="chezmoi edit --apply"
 # Functions 
 #
 # ============================================================================
+
+{{ if lookPath "uwu-cli" }}
+uwu() {
+  local cmd
+  cmd="$(uwu-cli "$@")" || return
+  vared -p "%F{green}%BEdit command:%b%f " -c cmd
+  print -s -- "$cmd"   # add to history
+  eval "$cmd"
+}
+{{ end }}
 
 generateSSHKeychain() {
 	if [[ ! -f ~/.ssh/id_ed25519 ]]; then
