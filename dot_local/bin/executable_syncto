@@ -8,7 +8,7 @@ import subprocess
 import sys
 
 DESCRIPTION = """
-Sync files to a remote host using rsync, by defalt syncs the current directory to the same path relative to ~ on the remote host.
+Sync files to a remote host using rsync, by default syncs the current directory to the same path relative to ~ on the remote host.
 
 The destination can be in the form of hostname, user@hostname or hostname:directory. If the destination directory is not specified it will default to the same path relative to ~ on the remote host as the source directory.
 
@@ -100,7 +100,7 @@ def main(argv: list[str]) -> None:
         return_code = subprocess.call(command)
     except KeyboardInterrupt:
         return_code = 1
-    except Exception as e:  # noqa: F722
+    except Exception as e:
         print(f"Error: {e}")
         return_code = 1
 

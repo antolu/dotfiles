@@ -114,7 +114,11 @@ uwu() {
 generateSSHKeychain() {
 	if [[ ! -f ~/.ssh/id_ed25519 ]]; then
 		echo "=> Generating ssh-keys"
-		ssh-keygen -t ed25519 -C "$USER@`cat /proc/sys/kernel/hostname`" -N ''
+		if [[ "$(uname)" == "Darwin" ]]; then
+			ssh-keygen -t ed25519 -C "$USER@$(hostname)" -N ''
+		else
+			ssh-keygen -t ed25519 -C "$USER@$(cat /proc/sys/kernel/hostname)" -N ''
+		fi
 		eval $(ssh-agent -s)
 		ssh-add ~/.ssh/id_ed25519
     echo "=> SSH keys generated and added to agent."
@@ -168,10 +172,10 @@ mkc () {
 gitc () {
   git clone "$1" "$2"
 
-  if [[ -z $2 ]]; then
+  if [[ -n $2 ]]; then
     cd "$2"
   else
-    cd "$1"
+    cd "$(basename "$1" .git)"
   fi
 }
 
