@@ -16,11 +16,8 @@ local function zathura_open_pdf()
     return
   end
 
-  -- Construct the command string, quoting the filename for safety
-  local command = "zathura '" .. pdf_file .. "' &"
-
   -- Execute the command asynchronously in the background
-  vim.fn.jobstart(command, { detach = true })
+  vim.fn.jobstart({ "zathura", pdf_file }, { detach = true })
 end
 
 -- Create a user command :ZathuraOpenPdf that calls the Lua function
