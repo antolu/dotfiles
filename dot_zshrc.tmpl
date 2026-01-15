@@ -18,15 +18,26 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # ============================================================================
-# 
+#
 # Environment variables
 #
 # ============================================================================
+
+{{- $apiKeys := includeTemplate ".api_keys.yml" | fromYaml }}
 
 export KRB5CCNAME=FILE:/tmp/krb5cc_`id -u`
 
 export EDITOR=nvim
 export VISUAL=nvim
+
+# API Keys
+export WAKATIME_API_KEY="{{ $apiKeys.wakatime_api_key }}"
+{{- if $apiKeys.openai_api_key }}
+export OPENAI_API_KEY="{{ $apiKeys.openai_api_key }}"
+{{- end }}
+{{- if $apiKeys.anthropic_api_key }}
+export ANTHROPIC_API_KEY="{{ $apiKeys.anthropic_api_key }}"
+{{- end }}
 
 # ============================================================================
 # 
