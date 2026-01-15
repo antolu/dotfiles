@@ -10,7 +10,7 @@ return {
 
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
-      table.insert(opts.sources, 1, {
+      table.insert(opts.sources, {
         name = "pypi",
         keyword_length = 4,
       })
