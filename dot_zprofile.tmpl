@@ -46,6 +46,7 @@ path=({{ if eq .chezmoi.os "darwin" }}
   /opt/homebrew/bin{{ end }}
   /usr/local/{bin,sbin}
   {{ .chezmoi.homeDir }}/.local/bin
+  /usr/local/texlive/2025/bin/universal-darwin/
   $path
 )
 
