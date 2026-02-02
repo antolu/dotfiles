@@ -1,5 +1,6 @@
+{{- $secrets := (joinPath .chezmoi.sourceDir "encrypted_dot_api_keys.yml.age" | include | decrypt | fromYaml) -}}
 [settings]
-api_key = {{ .wakatime_api_key }}
+api_key = "{{ $secrets.wakatime_api_key }}"
 proxy = 
 debug = false
 status_bar_enabled = true
