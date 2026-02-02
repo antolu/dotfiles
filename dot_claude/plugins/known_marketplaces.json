@@ -1,0 +1,18 @@
+{
+  "anthropic-agent-skills": {
+    "source": {
+      "source": "github",
+      "repo": "anthropics/skills"
+    },
+    "installLocation": "/Users/antonlu/.claude/plugins/marketplaces/anthropic-agent-skills",
+    "lastUpdated": "2026-01-13T10:22:24.074Z"
+  },
+  "claude-plugins-official": {
+    "source": {
+      "source": "github",
+      "repo": "anthropics/claude-plugins-official"
+    },
+    "installLocation": "/Users/antonlu/.claude/plugins/marketplaces/claude-plugins-official",
+    "lastUpdated": "2026-01-21T13:15:21.408Z"
+  }
+}
