@@ -1,3 +1,4 @@
-{{ if ne .wakatime_api_key "" -}}
+{{- $secrets := (joinPath .chezmoi.sourceDir "encrypted_dot_api_keys.yml.age" | include | decrypt | fromYaml) -}}
+{{ if ne $secrets.wakatime_api_key "" -}}
 return { { "wakatime/vim-wakatime", lazy = false } }
 {{ end -}}

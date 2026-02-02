@@ -23,7 +23,7 @@ fi
 #
 # ============================================================================
 
-{{- $apiKeys := includeTemplate ".api_keys.yml" | fromYaml }}
+{{- $secrets := (joinPath .chezmoi.sourceDir "encrypted_dot_api_keys.yml.age" | include | decrypt | fromYaml)}}
 
 export KRB5CCNAME=FILE:/tmp/krb5cc_`id -u`
 
@@ -31,12 +31,12 @@ export EDITOR=nvim
 export VISUAL=nvim
 
 # API Keys
-export WAKATIME_API_KEY="{{ $apiKeys.wakatime_api_key }}"
-{{- if $apiKeys.openai_api_key }}
-export OPENAI_API_KEY="{{ $apiKeys.openai_api_key }}"
+export WAKATIME_API_KEY="{{ $secrets.wakatime_api_key }}"
+{{- if $secrets.openai_api_key }}
+export OPENAI_API_KEY="{{ $secrets.openai_api_key }}"
 {{- end }}
-{{- if $apiKeys.anthropic_api_key }}
-export ANTHROPIC_API_KEY="{{ $apiKeys.anthropic_api_key }}"
+{{- if $secrets.anthropic_api_key }}
+export ANTHROPIC_API_KEY="{{ $secrets.anthropic_api_key }}"
 {{- end }}
 
 # ============================================================================
