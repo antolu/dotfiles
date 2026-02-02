@@ -1,8 +1,12 @@
 {{- $fullname := promptStringOnce . "fullname" "Your name" -}}
 {{- $email := promptStringOnce . "email" "Email address" -}}
-{{- $wakatime_api_key := promptStringOnce . "wakatime_api_key" "Wakatime API Key" -}}
+
+encryption = "age"
+
+[age]
+identity = "{{ .chezmoi.homeDir }}/.config/chezmoi/key.txt"
+recipient = "age18t892gx3kdj6hsk07t4npk8vq08ps3s3qa4q2qsnhdsptp66g45qcu7008"
 
 [data]
     fullname = {{ $fullname | quote }}
     email = {{ $email | quote }}
-    wakatime_api_key = {{ $wakatime_api_key | quote }}
