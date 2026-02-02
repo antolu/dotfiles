@@ -1,0 +1,57 @@
+{{- $secrets := (joinPath .chezmoi.sourceDir "encrypted_dot_api_keys.yml.age" | include | decrypt | fromYaml) -}}
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "anthropic/claude-sonnet-4-5",
+  "small_model": "anthropic/claude-3-5-haiku",
+  "mcp": {
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "{{ $secrets.context7_api_key }}"
+      },
+      "enabled": true
+    },
+    // "google-search": {
+    //   "type": "local",
+    //   "command": [
+    //     "npx",
+    //     "-y",
+    //     "@modelcontextprotocol/google-search-mcp"
+    //   ],
+    //   "environment": {
+    //     "GOOGLE_API_KEY": "{env:GOOGLE_API_KEY}",
+    //     "GOOGLE_CSE_ID": "{env:GOOGLE_CSE_ID}"
+    //   },
+    //   "enabled": true
+    // },
+    "memory": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "enabled": true
+    },
+    "filesystem": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "."
+      ],
+      "enabled": true
+    },
+    "thinking": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "enabled": true
+    }
+  },
+}
