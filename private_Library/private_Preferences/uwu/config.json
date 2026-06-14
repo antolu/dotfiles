@@ -1,0 +1,6 @@
+{
+	"type": "Custom",
+	"model": "qwen3.5:9b",
+	"baseURL": "http://localhost:11434/v1",
+	"apiKey": "ollama"
+}
