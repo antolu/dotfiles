@@ -16,32 +16,52 @@
 
 ### General development
 
-- If pre-commit hooks are configured, ensure pre-commit passes before finalizing commits
-- Large commits can be divided into smaller subcommits
 - Keep commit messages simple, only mentioning things that are new, have changed, or have been removed
-- Avoid using the term "key points" or "key anything" in documentation or comments
 - When making newlines in the code, you should not add whitespace in the empty lines
 - Never use formal tone in coding, comments, documentation, READMEs, etc, unless explicitly asked for. Words like comprehensive, enhanced, etc are not allowed
-- Always ensure pre-commit passes before attempting git commit
 - When adding a new feature to the code, do not plan for backwards compatibility unless explicitly asked for
 - Do not under any circumstance make code that is xxx_new, xxx_unified, xxx_refactor or xxx_jax. Just write xxx and replace the old code
 - Avoid phrases like "comprehensive", "key features", or similar cliché language in documentation, comments, and communications about code
-- never commit with --no-verify to skip pre-commit hooks unless requested by the user
 - when removing files you have to use rm -f to not have to not have to provide interactive confirmation
+- Always ensure pre-commit passes before attempting git commit
 - NEVER FINALIZE A COMMIT WITH --no-verify IF PRE-COMMIT FAILS!!! Unless the user asks for it!
-- Stop saying "You're absolutely right", ever. That phrase is banned. If you want to affirm agreement, find another term to use. Critisize the user's ideas if you think they are bad, don't just agree to everything.
 - NEVER automatically commit unless the user expliclity asks it for the specific message.
 - never revert a change without the user explicitly asking for it
 - don't add comments unless the user asks for it
-- never make summary documents of your work
 - IMPORTANT: do not run cd unless you absolutely have to. if you run cd, immediately run pwd after to remember where you are
-- IMPORTANT!!! NEVER COMMIT UNLESS THE USER ASKS FOR IT
-- never create markdown files to document your work unless the user asks for it
 - avoid running mypy and ruff standalone, unless the user asks for it. prefer using pre-commit if it is configured in pyproject.toml;
 - NEVER USE git add -A!!!
-- Use conventional commits for commit messages
+- Use conventional commits for commit messages, and prefer using logical or even better atomic commits if possible.
+- Avoid using sed to read files. Use the Read tool with selective lines instead.
 
 Always use:
 
 - context7 mcp for up to date documentation on third party code
 - sequential thinking mcp for any decision making
+- context_mempry for searching the repository.
+
+## Testing and Debugging Protocol
+
+### 1. Zero Blanket Test Runs
+
+- NEVER execute broad test suite commands (e.g., `pytest`, `npm test`, or running entire test directories) during the debugging phase.
+- Do not attempt to create, write, or redirect test output to custom external log files (to avoid triggering permission prompts).
+
+### 2. Evidence-Based Debugging via Cache
+
+- Leverage the test runner's internal state machine to fetch previous errors.
+- Always execute the "Last Failed Only" command first to inspect the current error stack:
+  <!-- UPDATE THIS LINE FOR YOUR RUNNER (e.g., vitest run --changedSince=HEAD) -->
+  - Command: `pytest --lf`
+
+### 3. Isolated Verification
+
+- When verifying a code fix, run *only* the specific file or individual test case that was broken.
+- Use explicit targeting to keep the execution under 1 second:
+  <!-- UPDATE THESE EXAMPLES FOR YOUR RUNNER -->
+  - Single File: `pytest tests/unit/test_auth.py`
+  - Single Test: `pytest tests/unit/test_auth.py::test_login_failure`
+
+### 4. Final Gate
+
+- You are permitted to run the full, unrestricted test suite exactly ONCE at the very end of your task, only after you are confident all isolated tests pass.
