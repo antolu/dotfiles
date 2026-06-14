@@ -7,12 +7,42 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "features": {
-    "edit_prediction_provider": "copilot",
+  "agent_servers": {
+    "opencode": {
+      "type": "registry",
+    },
+    "github-copilot-cli": {
+      "type": "registry",
+    },
+    "gemini": {
+      "type": "registry",
+    },
+    "codex-acp": {
+      "type": "registry",
+    },
+    "claude-acp": {
+      "type": "registry",
+    },
+  },
+  "outline_panel": {
+    "dock": "left",
+  },
+  "collaboration_panel": {
+    "dock": "left",
+  },
+  "git_panel": {
+    "dock": "left",
+  },
+  "project_panel": {
+    "dock": "left",
+    "hide_gitignore": true,
+  },
+  "edit_predictions": {
+    "provider": "copilot",
   },
   "agent": {
-    "always_allow_tool_actions": false,
-    "play_sound_when_agent_done": true,
+    "dock": "right",
+    "play_sound_when_agent_done": "always",
     "model_parameters": [],
     "default_model": {
       "provider": "copilot_chat",
@@ -67,7 +97,7 @@
           },
           "forwardSearch": {
             "executable": "/Applications/Skim.app/Contents/SharedSupport/displayline",
-            "args": ["-g", "-r", "%l", "%p", "%f"],
+            "args": ["-g", "-b", "%l", "%p", "%f"],
           },
         },
       },
