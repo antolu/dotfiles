@@ -18,3 +18,12 @@ type = "git-repo"
 url = "https://github.com/tmux-plugins/tpm"
 refreshPeriod = "168h"
 
+[".claude/skills"]
+type = "git-repo"
+url = "https://github.com/antolu/claude-skills.git"
+
+[".claude/skills".pull]
+args = ["--recurse-submodules", "--ff"]
+
+[".claude/skills".clone]
+args = ["--recursive"]
