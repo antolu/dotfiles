@@ -135,13 +135,10 @@ Host ml4
   GSSAPIDelegateCredentials yes
 
 {{- if eq .fullname "Anton Lu" }}
-Match exec atcern host olympus
+Host olympus
   User anton
-  HostName olympus
-
-Match exec notatcern host olympus
-  User anton
-  ProxyJump lxtunnel
+  HostName home.haochen.lu
+  Port 8022
 
 Match exec notatcern host pcbe17291
   Hostname pcbe17291
